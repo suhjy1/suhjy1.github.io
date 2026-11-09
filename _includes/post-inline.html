@@ -80,7 +80,14 @@
         if (!el) { return; }
         var fade = box.querySelector('.post-fade');
         var top = el.getBoundingClientRect().top - box.getBoundingClientRect().top;
-        box.style.maxHeight = Math.round(top + (fade ? fade.offsetHeight : 0)) + 'px';
+        var h = Math.round(top + (fade ? fade.offsetHeight : 0));
+        box.setAttribute('data-clip', h);
+        /* featured previews share one height: the shortest cut among them */
+        var fw = box.closest('.featured-wrap');
+        var boxes = fw ? fw.querySelectorAll('.post-inline[data-clip]') : [box];
+        var m = h;
+        boxes.forEach(function (b) { m = Math.min(m, +b.getAttribute('data-clip')); });
+        boxes.forEach(function (b) { b.style.maxHeight = m + 'px'; });
       };
       clip();
       setTimeout(clip, 400); setTimeout(clip, 1500);

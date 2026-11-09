@@ -7,7 +7,9 @@
 .featured-tab{font:inherit;font-size:.9rem;font-weight:600;padding:.4rem 1rem;border-radius:999px;border:1px solid var(--main-border-color);background:transparent;color:var(--text-muted-color);cursor:pointer}
 .featured-tab:hover{color:var(--text-color)}
 .featured-tab[aria-selected="true"]{background:var(--link-color);border-color:var(--link-color);color:var(--main-bg)}
-.featured-panel[hidden]{display:none}</style>
+.featured-panels{display:grid}
+.featured-panel{grid-area:1/1;min-width:0}
+.featured-panel.is-off{visibility:hidden;pointer-events:none}</style>
 {%- assign featured = site.posts | where_exp: "p", "p.featured" | sort: "featured" -%}
 <div class="featured-wrap">
 {%- if featured.size > 1 %}
@@ -17,11 +19,13 @@
 {%- endfor %}
 </div>
 {%- endif %}
+<div class="featured-panels">
 {%- for po in featured %}
-<div class="featured-panel" role="tabpanel" id="fpanel-{{ forloop.index }}" aria-labelledby="ftab-{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %}>
+<div class="featured-panel{% unless forloop.first %} is-off{% endunless %}" role="tabpanel" id="fpanel-{{ forloop.index }}" aria-labelledby="ftab-{{ forloop.index }}"{% unless forloop.first %} aria-hidden="true"{% endunless %}>
 {% include post-inline.html embed=po.embed preview=true url=po.url cut=po.preview_cut %}
 </div>
 {%- endfor %}
+</div>
 </div>
 {%- if featured.size > 1 %}
 <script>
@@ -32,10 +36,10 @@
       tabs.forEach(function (o) {
         var on = o === t;
         o.setAttribute('aria-selected', on ? 'true' : 'false');
-        document.getElementById(o.getAttribute('aria-controls')).hidden = !on;
+        var pnl = document.getElementById(o.getAttribute('aria-controls'));
+        pnl.classList.toggle('is-off', !on);
+        if (on) { pnl.removeAttribute('aria-hidden'); } else { pnl.setAttribute('aria-hidden', 'true'); }
       });
-      /* a hidden preview can't measure its cut point: re-run the clip now that it is visible */
-      window.dispatchEvent(new Event('resize'));
     });
   });
 })();
