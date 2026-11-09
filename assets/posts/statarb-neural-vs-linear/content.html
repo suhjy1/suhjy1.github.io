@@ -433,6 +433,7 @@ small.note{ display:block; color: var(--ink3); font: 13px/1.5 system-ui, sans-se
 <figcaption><span class="bias">free data</span>Figure 3. Fraction of the book traded per day, 3-month rolling mean, average of three seeds. End labels are full-period means.</figcaption>
 </figure>
 <p>So most of the gap is the control being bad, not the networks being good. Against a sensible reference the networks don't separate. Compared with the classical rule on the same dates, the paired t-statistics are 0.25 and 0.36.</p>
+<p>The return before costs points the same way. On the same dates the classical rule earned about +2.5% a year before costs, slightly more than either network, at a little less gross exposure (1.9 against 2.0). Per unit of risk the networks look a bit better before costs, with gross Sharpe ratios of 0.54 and 0.46 against 0.33, but I did not test either difference. Neither number shows the networks picking stocks better than the classical rule. What separates them after costs is trading: the classical rule paid about 3.6% a year in costs, against 2.6% and 2.2% for the networks.</p>
 
 <h2>The seeds disagree</h2>
 <p>The average hides how much each seed matters. The three LSTM seeds made +1.4%, −4.5% and +1.7% a year. That 6-point spread between seeds of one architecture is about as large as the whole gap between architectures.</p>
