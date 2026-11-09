@@ -35,7 +35,7 @@ The raw OU forecasts were about 40× too large. After calibrating them online, f
 
 As a cross-check without the stock-list bias, I ran the same rule, unchanged, on French's 49 industry portfolios over a 1980–1999 holdout. It lost money before costs (−0.89% per year gross, HAC t = −3.46). Industry returns tend to continue rather than reverse, so this is an industry-level check rather than a survivorship-free test of the stock signal; that needs a rerun on data that includes delisted stocks.
 
-The sequence models traded about 60–66% less than a linear policy and beat it by 6–7 pp per year, about half from lower costs and half because the linear policy lost money before costs. They did not beat the classical reference, and the results were unstable from seed to seed.
+Against the classical rule on the same dates, the sequence models showed no detectable difference after costs (paired t 0.25 and 0.36). They earned slightly less before costs (about +2.1% a year against +2.5%) and traded 40–50% less. They did beat a linear policy by 6–7 pp per year, but mostly because that control traded far more and lost money even before costs. Results were also unstable from seed to seed.
 
 ## Takeaways
 

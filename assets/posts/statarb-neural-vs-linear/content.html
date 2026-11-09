@@ -233,6 +233,13 @@
 .eq .katex-display{margin:.6em 0}
 .eq .katex-display .mtable .arraycolsep{width:1.2em}
 .katex{white-space:nowrap}
+table.ex{width:100%;border-collapse:collapse;margin:22px 0 6px;font:14px/1.45 system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--ink)}
+table.ex th, table.ex td{padding:6px 7px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+table.ex th:first-child, table.ex td:first-child{text-align:left}
+table.ex thead th{color:var(--ink3);font-weight:600;border-bottom:1.5px solid var(--ink3)}
+table.ex tr.ref td{color:var(--ink2);font-style:italic}
+.tablewrap{overflow-x:auto}
+p.tcap{font:13px/1.5 system-ui,sans-serif;color:var(--ink3);margin:4px 0 22px}
 :host{ color-scheme: light; --bg:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --ink3:#8a8984; --line:#e6e4dd;
           --pos:#2a78d6; --neg:#eb6834; --neu:#9c9a92; --card:#f4f3ef; --shade: rgba(120,118,110,.13);
           --s3:#1baf7a; --s7:#6250d6; --tipbg:#0b0b0b; --tipfg:#f0efec; }
@@ -318,7 +325,7 @@ small.note{ display:block; color: var(--ink3); font: 13px/1.5 system-ui, sans-se
 <main>
 <p class="meta">Stat-arb notes</p>
 <h1>Neural policies trade less, and tie the classical rule</h1>
-<p class="sub">Two sequence networks beat a linear policy by more than 6% a year. About half of that came from trading less and half from the linear policy losing money before costs, and neither network beat the classical rule.</p>
+<p class="sub">Against the classical rule, two sequence networks earned slightly less before costs, traded 40–50% less, and ended with no detectable difference after costs. They beat a linear control by more than 6% a year, but mostly because that control lost money even before costs.</p>
 <p class="aside">All numbers are from free Yahoo Finance and SEC data that contain only companies listed today, so they are survivorship-biased. Missing failed stocks most likely flatter a buy-the-losers strategy, but acquisitions delisted at a premium cut the other way, so the direction is likely, not proven. Nothing here claims a profitable strategy.</p>
 
 <h2>The test</h2>
@@ -361,9 +368,19 @@ small.note{ display:block; color: var(--ink3); font: 13px/1.5 system-ui, sans-se
 <text x="510" y="96.8" fill="var(--ink)" font-size="12.5"><tspan fill="var(--neu)">■</tspan> Classical −9%</text>
 <text x="510" y="195.3" fill="var(--ink)" font-size="12.5"><tspan fill="var(--neg)">■</tspan> Linear −60%</text>
 </svg>
-<figcaption><span class="bias">free data</span>Figure 1. Cumulative net return of the seed-average books, 2018–2026 (daily returns summed, not compounded). Seed-average net: linear −6.8% a year, LSTM −0.5%, Conv–Transformer −0.1%. The classical rule on the same dates, dashed, lost 1.1% a year.</figcaption>
+<figcaption><span class="bias">free data</span>Figure 1. Cumulative net return of the seed-average books, 2018–2026 (daily returns summed, not compounded). The classical rule on the same dates is dashed. Annual figures for every book are in Table 1.</figcaption>
 </figure>
-<p>No architecture made money after costs. The two networks ended close to flat and the linear model lost heavily. The prediction was wrong: both networks beat the control, by 6.4 and 6.7 percentage points a year (paired HAC t 4.3 and 4.2 over about 2,200 days). That sounds like a win for deep learning. It isn't.</p>
+<div class="tablewrap"><table class="ex">
+<thead><tr><th>Book</th><th>Before costs</th><th>Costs</th><th>Net</th><th>Gross SR</th><th>Turnover</th><th>Net t</th></tr></thead>
+<tbody>
+<tr class="ref"><td>Classical rule (reference)</td><td>+2.5%</td><td>3.6%</td><td>−1.1%</td><td>0.33</td><td>0.33</td><td>−0.4</td></tr>
+<tr><td>LSTM</td><td>+2.1%</td><td>2.6%</td><td>−0.5%</td><td>0.54</td><td>0.20</td><td>−0.4</td></tr>
+<tr><td>Conv–Transformer</td><td>+2.1%</td><td>2.2%</td><td>−0.1%</td><td>0.46</td><td>0.17</td><td>−0.1</td></tr>
+<tr><td>Linear (control)</td><td>−1.3%</td><td>5.6%</td><td>−6.8%</td><td>−0.55</td><td>0.49</td><td>−9.5</td></tr>
+</tbody></table></div>
+<p class="tcap">Table 1. Seed-average books, 2018–2026, on the same 2,210 test days. Returns and costs are a year; SR is the Sharpe ratio before costs; turnover is the fraction of the book traded per day; net t is the HAC t-statistic of the net return. The networks and linear policy run at gross exposure 2.0; the classical rule at 1.9. Rounding means before costs minus costs may differ from after costs by 0.1.</p>
+<p>No architecture made money after costs. The comparison that matters is with the classical rule, and there the networks show no detectable difference. Before costs they earned slightly less than it, about +2.1% a year against +2.5%. They traded 40–50% less, paid less to trade, and ended slightly ahead after costs: +0.6 and +0.9 percentage points a year, with paired HAC t-statistics of 0.25 and 0.36. That is too small to call either way. It does not show the two are equivalent, only that this test can't tell them apart.</p>
+<p>The registered comparison was against the linear control, and there my prediction was wrong: both networks beat it, by 6.4 and 6.7 percentage points a year (paired HAC t 4.3 and 4.2 over about 2,200 days). That sounds like a win for deep learning. It isn't.</p>
 
 <h2>Why the networks won</h2>
 <p>The linear policy lost money even before costs. Its seed-average gross return was −1.3% a year, a gross Sharpe of −0.55, while both networks earned about +2.1% a year before costs.</p>
@@ -432,8 +449,7 @@ small.note{ display:block; color: var(--ink3); font: 13px/1.5 system-ui, sans-se
 </svg>
 <figcaption><span class="bias">free data</span>Figure 3. Fraction of the book traded per day, 3-month rolling mean, average of three seeds. End labels are full-period means.</figcaption>
 </figure>
-<p>So most of the gap is the control being bad, not the networks being good. Against a sensible reference the networks don't separate. Compared with the classical rule on the same dates, the paired t-statistics are 0.25 and 0.36.</p>
-<p>The return before costs points the same way. On the same dates the classical rule earned about +2.5% a year before costs, slightly more than either network, at a little less gross exposure (1.9 against 2.0). Per unit of risk the networks look a bit better before costs, with gross Sharpe ratios of 0.54 and 0.46 against 0.33, but I did not test either difference. Neither number shows the networks picking stocks better than the classical rule. What separates them after costs is trading: the classical rule paid about 3.6% a year in costs, against 2.6% and 2.2% for the networks.</p>
+<p>So most of the gap is the control being bad, not the networks being good. Against the classical rule, nothing shows the networks picking stocks better. Per unit of risk they look a little better before costs, with gross Sharpe ratios of 0.54 and 0.46 against 0.33, but I did not test that difference. What separates them after costs is trading: the classical rule paid about 3.6% a year in costs, against 2.6% and 2.2% for the networks.</p>
 
 <h2>The seeds disagree</h2>
 <p>The average hides how much each seed matters. The three LSTM seeds made +1.4%, −4.5% and +1.7% a year. That 6-point spread between seeds of one architecture is about as large as the whole gap between architectures.</p>
