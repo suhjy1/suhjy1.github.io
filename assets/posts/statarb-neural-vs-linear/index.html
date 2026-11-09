@@ -12,7 +12,7 @@
 </style>
 </head>
 <body>
-<title>Neural policies vs a linear control</title>
+<title>Neural policies trade less, and tie the classical rule</title>
 <style>
   :root { color-scheme: light; --bg:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --ink3:#8a8984; --line:#e6e4dd;
           --pos:#2a78d6; --neg:#eb6834; --neu:#9c9a92; --card:#f4f3ef; --shade: rgba(120,118,110,.13);
@@ -56,8 +56,8 @@
 
 <main>
 <p class="meta">Stat-arb notes</p>
-<h1>Neural policies vs a linear control: winning by trading less</h1>
-<p class="sub">Two sequence networks beat a linear policy by more than 6% a year. Almost all of that came from trading less, not from picking better stocks.</p>
+<h1>Neural policies trade less, and tie the classical rule</h1>
+<p class="sub">Two sequence networks beat a linear policy by more than 6% a year. About half of that came from trading less and half from the linear policy losing money before costs, and neither network beat the classical rule.</p>
 <p class="aside">All numbers are from free Yahoo Finance and SEC data that contain only companies listed today, so they are survivorship-biased. Missing failed stocks most likely flatter a buy-the-losers strategy, but acquisitions delisted at a premium cut the other way, so the direction is likely, not proven. Nothing here claims a profitable strategy.</p>
 
 <h2>The test</h2>
@@ -295,7 +295,7 @@ c-10,0,-16.667,5,-20,15z M410 15 H367 v585 v0 v585 h43z"/></svg></span></span></
 <h2>What I'd keep from this</h2>
 <ol>
 <li><b>A control has to be good, not just simple.</b> Beating a policy that loses before costs says little. Compare against the best simple rule you have.</li>
-<li><b>Check turnover before crediting the model.</b> Here a 6-point net gain was mostly a cost gain.</li>
+<li><b>Check turnover before crediting the model.</b> Here about half of a 6-point net gain was a cost gain.</li>
 <li><b>Report every seed.</b> When seeds disagree this much, a seed average hides the result.</li>
 <li><b>Look for degenerate books.</b> A cheap daily check on the share of positions on one side would have flagged the one-sided bets on day one.</li>
 <li><b>Write the prediction down.</b> It was wrong, and knowing why it was wrong was the most useful part of the test.</li>
