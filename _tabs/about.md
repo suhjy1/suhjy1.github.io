@@ -4,26 +4,23 @@ icon: fas fa-info-circle
 order: 2
 ---
 
-I am Jung Yong Suh, a quantitative analyst based in Newport Beach. At work I build credit-risk and real-estate forecasting models. On my own time I research systematic trading strategies and build the infrastructure to test them: data pipelines, simulators, and evaluation frameworks.
+## About Me
 
-Most of my effort goes into making evaluation honest. I pre-register pass rules, hold out data I never read, and model costs and execution realistically. I report the results whether or not a strategy makes money, since a well-established negative result is still useful.
+I'm Jung, a quantitative analyst in Newport Beach. I like hard problems, especially ones where the answer can be checked. That started with math competitions. I qualified for the USAMO as a student and later coached students for the AMC, which taught me as much about explaining ideas as solving them.
 
-## Experience
+Outside of work, I'm a car enthusiast and train BJJ.
 
-- **Quantitative Analyst**, Green Street (2023 – present). Commercial real estate fundamental forecasting, CMBS credit-risk modeling, and research automation.
-- **Quantitative Researcher (contract)**, Allspring Global Investments. Systematic equity factor research.
-- **Quantitative Researcher**, Infinite Quant. High-frequency microstructure signal research.
-- **Intern**, Federal Reserve.
+## What I Do
 
-## Education
+I'm currently a quant at Green Street. Before that, I did systematic equity factor research at Allspring Global Investments, high-frequency signal research at Infinite Quant, and stress test research at the Federal Reserve.
 
-- M.S. Mathematics and M.S. Financial Engineering, Claremont Graduate University (2022)
-- B.A. Business Economics, UC Irvine (2016)
-- USAMO qualifier
+On my own time, I research systematic trading strategies and build what I need to test them properly. I care more about whether a result is true than whether it looks good, so I pre-register pass rules, hold out data, and model costs realistically. The projects on this site are the result, including the ones that didn't make money.
 
-## Contact
+## Core Skills
 
-[GitHub](https://github.com/suhjy1)
+- Python, SQL, C++
+- Time series, stochastic processes, statistical inference, machine learning
+- Forecasting, credit-risk modeling, portfolio optimization, backtesting
 
 ## Licensing
 
