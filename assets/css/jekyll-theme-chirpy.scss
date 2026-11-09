@@ -1,0 +1,89 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* append your custom style below */
+
+/* ── Projects tab ─────────────────────────────────────────── */
+.projects-intro { color: var(--text-muted-color); }
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.content a.project-card,
+a.project-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 0.625rem;
+  background: var(--card-bg);
+  border: 1px solid var(--main-border-color);
+  box-shadow: var(--card-shadow);
+  color: var(--text-color);
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    background: var(--card-hover-bg);
+    transform: translateY(-2px);
+    color: var(--text-color) !important;
+    border-bottom: 1px solid var(--main-border-color);
+  }
+
+  .project-cover { aspect-ratio: 16 / 9; background-size: cover; background-position: center; }
+  .project-card-title { font-size: 1.15rem; font-weight: 600; line-height: 1.35; margin: 0.5rem 0 0.4rem; color: var(--heading-color); }
+  p { font-size: 0.92rem; line-height: 1.55; color: var(--text-muted-color); margin: 0 0 0.9rem; }
+}
+
+.project-card-body { padding: 1rem 1.25rem 1.25rem; display: flex; flex-direction: column; flex: 1; }
+.project-card-meta { display: flex; gap: 0.6rem; align-items: center; font-size: 0.8rem; color: var(--text-muted-color); }
+
+.project-status {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.1rem 0.5rem;
+  border-radius: 1rem;
+  border: 1px solid var(--link-color);
+  color: var(--link-color);
+  margin-left: 0.4rem;
+}
+.project-card-meta .project-status { margin-left: 0; }
+
+.project-tags {
+  display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto;
+  span {
+    font-size: 0.72rem; padding: 0.05rem 0.5rem; border-radius: 1rem;
+    border: 1px solid var(--tag-border); color: var(--text-muted-color);
+  }
+}
+
+/* ── Project detail page ──────────────────────────────────── */
+.project-crumb { font-size: 0.9rem; margin-bottom: 0.25rem; }
+.project-lede { font-size: 1.1rem; color: var(--text-muted-color); }
+.project-facts {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.9rem;
+  padding: 0.75rem 0; margin-bottom: 1rem;
+  border-top: 1px solid var(--main-border-color); border-bottom: 1px solid var(--main-border-color);
+  color: var(--text-muted-color);
+}
+.project-hero { width: 100%; border-radius: 0.5rem; margin: 0.5rem 0 1.5rem; }
+.project-related {
+  margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--main-border-color);
+  h2 { font-size: 1.2rem; }
+}
