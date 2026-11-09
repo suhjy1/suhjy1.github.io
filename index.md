@@ -13,14 +13,10 @@ I am a quantitative researcher. This site collects condensed, public versions of
 
 {% assign projects = site.projects | sort: "order" %}
 {% for pr in projects %}
-**{{ pr.title }}**
-{% assign posts = site.posts | where: "project", pr.slug | sort: "series" %}
-{% for po in posts %}
-{{ po.series }}. [{{ po.title }}]({{ po.url | relative_url }})
-{% endfor %}
-{% endfor %}
+### {{ pr.title }}
 
-All posts, with summaries, are on the [Blog]({{ '/blog/' | relative_url }}) page.
+{% include post-cards.html project=pr.slug %}
+{% endfor %}
 
 ## Links
 

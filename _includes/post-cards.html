@@ -5,8 +5,7 @@
   <a class="project-card" href="{{ po.url | relative_url }}">
     {% if po.image.path %}<div class="project-cover" style="background-image:url('{{ po.image.path | relative_url }}')" role="img" aria-label="{{ po.title }}"></div>{% endif %}
     <div class="project-card-body">
-      {% if po.series %}<div class="post-card-meta">Part {{ po.series }} of {{ posts.size }}</div>{% endif %}
-      <div class="project-card-title">{{ po.title }}</div>
+            <div class="project-card-title">{{ po.title }}</div>
       <p>{{ po.description }}</p>
     </div>
   </a>
