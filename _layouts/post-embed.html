@@ -3,12 +3,14 @@ layout: page
 ---
 {%- comment -%}
   A post written as a self-contained HTML document (its own CSS, charts and fonts).
-  The document is served as a static file (`embed:` in front matter) and shown here in a
-  same-origin frame that grows to its full height, so the site sidebar and tabs stay visible
-  and the post keeps its own design.
+  tools/build_embeds.py splits the document in assets/posts/<slug>/ into content.html and
+  fonts.css. This layout loads content.html into a shadow root placed directly in the page,
+  so the post keeps its own design, site styles don't leak in, and the page scrolls exactly
+  like any other page. The post's chart scripts run against the shadow root.
+  Inline scripts here must use block comments only: Chirpy minifies pages onto one line.
 {%- endcomment -%}
-<iframe id="post-frame" src="{{ page.embed | relative_url }}" title="{{ page.title | escape }}"
-  style="width:100%;border:0;display:block;min-height:80vh;border-radius:8px" loading="eager"></iframe>
+<link rel="stylesheet" href="{{ page.embed | relative_url }}fonts.css">
+<div id="post-host" data-src="{{ page.embed | relative_url }}content.html" style="display:block;border-radius:8px;overflow:hidden"></div>
 <noscript><p><a href="{{ page.embed | relative_url }}">Open the post</a></p></noscript>
 
 <nav class="post-embed-nav">
@@ -27,33 +29,48 @@ layout: page
 
 <script>
 (function () {
-  var f = document.getElementById('post-frame');
-  var ready = false;
-  function doc() { try { return f.contentDocument; } catch (e) { return null; } }
-  function fit() { var d = doc(); if (d && d.documentElement) { f.style.height = d.documentElement.scrollHeight + 'px'; } }
-  function init() {
-    var d = doc();
-    if (ready || !d || !d.body || d.location.href === 'about:blank') { return; }
-    ready = true;
-    fit();
-    /* links inside the post open in the main window; in-page anchors scroll the main window */
-    d.querySelectorAll('a[href]').forEach(function (a) {
-      var h = a.getAttribute('href');
-      if (h.charAt(0) === '#') {
-        a.addEventListener('click', function (ev) {
-          var el = d.getElementById(decodeURIComponent(h.slice(1)));
-          if (!el) { return; }
-          ev.preventDefault();
-          window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY + el.getBoundingClientRect().top - 70, behavior: 'smooth' });
-        });
-      } else { a.target = '_top'; }
-    });
-    if (window.ResizeObserver) { new ResizeObserver(fit).observe(d.documentElement); }
-    setTimeout(fit, 300); setTimeout(fit, 1500); setTimeout(fit, 4000);
+  var host = document.getElementById('post-host');
+  if (!host || !host.attachShadow) { return; }
+  var root = host.attachShadow({ mode: 'open' });
+  function theme() {
+    var m = document.documentElement.getAttribute('data-mode');
+    if (!m) { m = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    host.setAttribute('data-theme', m);
   }
-  f.addEventListener('load', init);
-  var d0 = doc();
-  if (d0 && d0.readyState === 'complete') { init(); }
-  window.addEventListener('resize', fit);
+  theme();
+  fetch(host.getAttribute('data-src')).then(function (r) { return r.text(); }).then(function (html) {
+    root.innerHTML = html;
+    var wrap = root.querySelector('.post-body') || root;
+    /* the post's scripts were written for a whole page: point their document lookups at the shadow root */
+    var fake = new Proxy(document, {
+      get: function (t, p) {
+        if (p === 'getElementById') { return function (i) { return root.getElementById(i); }; }
+        if (p === 'querySelector') { return function (s) { return root.querySelector(s); }; }
+        if (p === 'querySelectorAll') { return function (s) { return root.querySelectorAll(s); }; }
+        if (p === 'getElementsByClassName') { return function (s) { return wrap.getElementsByClassName(s); }; }
+        if (p === 'getElementsByTagName') { return function (s) { return wrap.getElementsByTagName(s); }; }
+        if (p === 'documentElement') { return host; }
+        if (p === 'body') { return wrap; }
+        var v = t[p];
+        return typeof v === 'function' ? v.bind(t) : v;
+      }
+    });
+    root.querySelectorAll('script[type="text/x-post"]').forEach(function (s) {
+      try { (new Function('document', s.textContent))(fake); } catch (e) { console.error('post script', e); }
+    });
+    /* in-page anchors: scroll the page to the target inside the post */
+    root.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (ev) {
+        var el = root.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+        if (!el) { return; }
+        ev.preventDefault();
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' });
+      });
+    });
+    if (location.hash) {
+      var target = root.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (target) { target.scrollIntoView(); }
+    }
+  });
 })();
 </script>

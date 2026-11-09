@@ -26,8 +26,8 @@
 <body><main>
 <h1>Survivorship in the order book</h1>
 <p class="sub">Why the fills other market makers kept were a poor guide to what a slow, passive order would earn, on Polymarket's crypto up/down contracts.</p>
-<p class="meta">Research note · 8 November 2026</p>
-<p class="meta"><em>Updated 8 November 2026: fill-model statements corrected to match "Calibrating a fill simulator".</em></p>
+<p class="meta">Research note</p>
+<p class="meta"><em>Update: fill-model statements corrected to match "Calibrating a fill simulator".</em></p>
 <p>Polymarket lists short contracts on whether Bitcoin and a few other coins will be higher at the end of a 15-minute or one-hour window, and anyone can make markets in them. I wanted to know whether a slow trader working from home could earn by providing liquidity without winning a speed race. There was a promising route: wait one cent behind the best price, and when the orders ahead are cancelled, inherit the front of the queue for free. Real makers' fills that arrived this way looked profitable. My simulated order doing the same thing lost money.</p>
 
 <p>The reason is a selection effect. A real maker's fill exists only if that maker chose to stay. In the dangerous moments, just before the price moves through a level, the real makers leave and no fill is recorded. My simulated order, unable to leave in time, is the one that gets filled. The data shows the moments makers chose to stay; my losses come from the moments they chose to leave.</p>

@@ -9,8 +9,8 @@ Turn any HTML file into a blog post.
 
 Two modes (auto-detected, override with --mode):
   standalone  A full HTML document (<!doctype>/<html>/<body>). Saved as-is to
-              assets/posts/<slug>/ and shown inside the site page (sidebar visible) in a frame
-              that grows to its full height. Add `series: N` to set its order within a project.
+              assets/posts/<slug>/ and shown inline in the site page (sidebar visible), inside a
+              shadow DOM so its styles stay separate. Needs tinycss2 (pip install tinycss2). Add `series: N` to set its order within a project.
   site        An HTML fragment (no <html>/<body>). Wrapped in the Chirpy post layout (sidebar,
               TOC, MathJax, tags), like a Markdown post. Use --mode site on a full document to pull out
               just its <body> (plus any <style>/<script> from <head>) and wrap it in the site.
@@ -147,6 +147,12 @@ def convert(path: Path, a) -> Path:
         doc = ROOT / "assets" / "posts" / slug / "index.html"
         doc.parent.mkdir(parents=True, exist_ok=True)
         doc.write_text(body.strip() + "\n", encoding="utf-8")
+        try:  # split into content.html + fonts.css for inline display (see tools/build_embeds.py)
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            import build_embeds
+            build_embeds.build(doc)
+        except ImportError:
+            print("  ! run `pip install tinycss2` then `python tools/build_embeds.py` before pushing")
         lines += [f"embed: /assets/posts/{slug}/", "---"]
         out_text = "\n".join(lines) + "\n"
     else:

@@ -1,0 +1,396 @@
+<style>:host{ color-scheme: light; --bg:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --ink3:#8a8984; --line:#e6e4dd;
+          --pos:#2a78d6; --neg:#eb6834; --neu:#9c9a92; --card:#f4f3ef; --shade: rgba(120,118,110,.13); }
+@media (prefers-color-scheme: dark) {:host(:not([data-theme="light"])){ color-scheme: dark; --bg:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8d8c85; --line:#33322f; --pos:#3987e5; --neg:#d95926; --neu:#7b7a73; --card:#242422; --shade: rgba(200,198,190,.10); }}
+:host([data-theme="dark"]){ color-scheme: dark; --bg:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8d8c85; --line:#33322f; --pos:#3987e5; --neg:#d95926; --neu:#7b7a73; --card:#242422; --shade: rgba(200,198,190,.10); }
+.post-body{ margin:0; background:var(--bg); color:var(--ink); font: 17px/1.65 Georgia, "Times New Roman", serif; }
+main{ max-width: 720px; margin: 0 auto; padding: 48px 16px 80px; }
+h1{ font-size: 2.0rem; line-height:1.15; margin: 0 0 8px; font-weight: 600; }
+.sub{ color: var(--ink2); font-size: 1.1rem; margin: 0 0 30px; }
+.meta{ font: 13px system-ui, sans-serif; color: var(--ink3); margin: 0 0 28px; }
+h2{ font-size: 1.3rem; margin: 40px 0 10px; font-weight: 600; }
+p, ul, ol{ margin: 0 0 18px; }
+li{ margin: 0 0 6px; }
+code{ font: 15px ui-monospace, Menlo, monospace; }
+figure{ margin: 26px 0 30px; padding: 16px 16px 10px; background: var(--card); border-radius: 12px; }
+figcaption{ font: 14px/1.5 system-ui, sans-serif; color: var(--ink2); margin-top: 8px; }
+figure svg{ width: 100%; height: auto; display: block; font: 13px system-ui, sans-serif; }
+.aside{ border-left: 3px solid var(--line); padding: 2px 0 2px 16px; color: var(--ink2); margin: 0 0 18px; }
+.legend{ font: 13px system-ui, sans-serif; color: var(--ink2); margin: 0 0 6px; }
+.sw{ display:inline-block; width:10px; height:10px; border-radius:2px; vertical-align:middle; margin: 0 4px 0 10px; }
+.eq{ text-align:center; margin: 0 0 18px; }
+small.note{ display:block; color: var(--ink3); font: 13px/1.5 system-ui, sans-serif; margin-top: 40px; }
+.katex{text-rendering:auto;font:normal 1.21em KaTeX_Main,Times New Roman,serif;line-height:1.2;text-indent:0}
+.katex *{-ms-high-contrast-adjust:none!important;border-color:currentColor}
+.katex .katex-version:after{content:"0.16.9"}
+.katex .katex-mathml{clip:rect(1px,1px,1px,1px);border:0;height:1px;overflow:hidden;padding:0;position:absolute;width:1px}
+.katex .katex-html>.newline{display:block}
+.katex .base{position:relative;white-space:nowrap;width:-webkit-min-content;width:-moz-min-content;width:min-content}
+.katex .base, .katex .strut{display:inline-block}
+.katex .textbf{font-weight:700}
+.katex .textit{font-style:italic}
+.katex .textrm{font-family:KaTeX_Main}
+.katex .textsf{font-family:KaTeX_SansSerif}
+.katex .texttt{font-family:KaTeX_Typewriter}
+.katex .mathnormal{font-family:KaTeX_Math;font-style:italic}
+.katex .mathit{font-family:KaTeX_Main;font-style:italic}
+.katex .mathrm{font-style:normal}
+.katex .mathbf{font-family:KaTeX_Main;font-weight:700}
+.katex .boldsymbol{font-family:KaTeX_Math;font-style:italic;font-weight:700}
+.katex .amsrm, .katex .mathbb, .katex .textbb{font-family:KaTeX_AMS}
+.katex .mathcal{font-family:KaTeX_Caligraphic}
+.katex .mathfrak, .katex .textfrak{font-family:KaTeX_Fraktur}
+.katex .mathboldfrak, .katex .textboldfrak{font-family:KaTeX_Fraktur;font-weight:700}
+.katex .mathtt{font-family:KaTeX_Typewriter}
+.katex .mathscr, .katex .textscr{font-family:KaTeX_Script}
+.katex .mathsf, .katex .textsf{font-family:KaTeX_SansSerif}
+.katex .mathboldsf, .katex .textboldsf{font-family:KaTeX_SansSerif;font-weight:700}
+.katex .mathitsf, .katex .textitsf{font-family:KaTeX_SansSerif;font-style:italic}
+.katex .mainrm{font-family:KaTeX_Main;font-style:normal}
+.katex .vlist-t{border-collapse:collapse;display:inline-table;table-layout:fixed}
+.katex .vlist-r{display:table-row}
+.katex .vlist{display:table-cell;position:relative;vertical-align:bottom}
+.katex .vlist>span{display:block;height:0;position:relative}
+.katex .vlist>span>span{display:inline-block}
+.katex .vlist>span>.pstrut{overflow:hidden;width:0}
+.katex .vlist-t2{margin-right:-2px}
+.katex .vlist-s{display:table-cell;font-size:1px;min-width:2px;vertical-align:bottom;width:2px}
+.katex .vbox{align-items:baseline;display:inline-flex;flex-direction:column}
+.katex .hbox{width:100%}
+.katex .hbox, .katex .thinbox{display:inline-flex;flex-direction:row}
+.katex .thinbox{max-width:0;width:0}
+.katex .msupsub{text-align:left}
+.katex .mfrac>span>span{text-align:center}
+.katex .mfrac .frac-line{border-bottom-style:solid;display:inline-block;width:100%}
+.katex .hdashline, .katex .hline, .katex .mfrac .frac-line, .katex .overline .overline-line, .katex .rule, .katex .underline .underline-line{min-height:1px}
+.katex .mspace{display:inline-block}
+.katex .clap, .katex .llap, .katex .rlap{position:relative;width:0}
+.katex .clap>.inner, .katex .llap>.inner, .katex .rlap>.inner{position:absolute}
+.katex .clap>.fix, .katex .llap>.fix, .katex .rlap>.fix{display:inline-block}
+.katex .llap>.inner{right:0}
+.katex .clap>.inner, .katex .rlap>.inner{left:0}
+.katex .clap>.inner>span{margin-left:-50%;margin-right:50%}
+.katex .rule{border:0 solid;display:inline-block;position:relative}
+.katex .hline, .katex .overline .overline-line, .katex .underline .underline-line{border-bottom-style:solid;display:inline-block;width:100%}
+.katex .hdashline{border-bottom-style:dashed;display:inline-block;width:100%}
+.katex .sqrt>.root{margin-left:.27777778em;margin-right:-.55555556em}
+.katex .fontsize-ensurer.reset-size1.size1, .katex .sizing.reset-size1.size1{font-size:1em}
+.katex .fontsize-ensurer.reset-size1.size2, .katex .sizing.reset-size1.size2{font-size:1.2em}
+.katex .fontsize-ensurer.reset-size1.size3, .katex .sizing.reset-size1.size3{font-size:1.4em}
+.katex .fontsize-ensurer.reset-size1.size4, .katex .sizing.reset-size1.size4{font-size:1.6em}
+.katex .fontsize-ensurer.reset-size1.size5, .katex .sizing.reset-size1.size5{font-size:1.8em}
+.katex .fontsize-ensurer.reset-size1.size6, .katex .sizing.reset-size1.size6{font-size:2em}
+.katex .fontsize-ensurer.reset-size1.size7, .katex .sizing.reset-size1.size7{font-size:2.4em}
+.katex .fontsize-ensurer.reset-size1.size8, .katex .sizing.reset-size1.size8{font-size:2.88em}
+.katex .fontsize-ensurer.reset-size1.size9, .katex .sizing.reset-size1.size9{font-size:3.456em}
+.katex .fontsize-ensurer.reset-size1.size10, .katex .sizing.reset-size1.size10{font-size:4.148em}
+.katex .fontsize-ensurer.reset-size1.size11, .katex .sizing.reset-size1.size11{font-size:4.976em}
+.katex .fontsize-ensurer.reset-size2.size1, .katex .sizing.reset-size2.size1{font-size:.83333333em}
+.katex .fontsize-ensurer.reset-size2.size2, .katex .sizing.reset-size2.size2{font-size:1em}
+.katex .fontsize-ensurer.reset-size2.size3, .katex .sizing.reset-size2.size3{font-size:1.16666667em}
+.katex .fontsize-ensurer.reset-size2.size4, .katex .sizing.reset-size2.size4{font-size:1.33333333em}
+.katex .fontsize-ensurer.reset-size2.size5, .katex .sizing.reset-size2.size5{font-size:1.5em}
+.katex .fontsize-ensurer.reset-size2.size6, .katex .sizing.reset-size2.size6{font-size:1.66666667em}
+.katex .fontsize-ensurer.reset-size2.size7, .katex .sizing.reset-size2.size7{font-size:2em}
+.katex .fontsize-ensurer.reset-size2.size8, .katex .sizing.reset-size2.size8{font-size:2.4em}
+.katex .fontsize-ensurer.reset-size2.size9, .katex .sizing.reset-size2.size9{font-size:2.88em}
+.katex .fontsize-ensurer.reset-size2.size10, .katex .sizing.reset-size2.size10{font-size:3.45666667em}
+.katex .fontsize-ensurer.reset-size2.size11, .katex .sizing.reset-size2.size11{font-size:4.14666667em}
+.katex .fontsize-ensurer.reset-size3.size1, .katex .sizing.reset-size3.size1{font-size:.71428571em}
+.katex .fontsize-ensurer.reset-size3.size2, .katex .sizing.reset-size3.size2{font-size:.85714286em}
+.katex .fontsize-ensurer.reset-size3.size3, .katex .sizing.reset-size3.size3{font-size:1em}
+.katex .fontsize-ensurer.reset-size3.size4, .katex .sizing.reset-size3.size4{font-size:1.14285714em}
+.katex .fontsize-ensurer.reset-size3.size5, .katex .sizing.reset-size3.size5{font-size:1.28571429em}
+.katex .fontsize-ensurer.reset-size3.size6, .katex .sizing.reset-size3.size6{font-size:1.42857143em}
+.katex .fontsize-ensurer.reset-size3.size7, .katex .sizing.reset-size3.size7{font-size:1.71428571em}
+.katex .fontsize-ensurer.reset-size3.size8, .katex .sizing.reset-size3.size8{font-size:2.05714286em}
+.katex .fontsize-ensurer.reset-size3.size9, .katex .sizing.reset-size3.size9{font-size:2.46857143em}
+.katex .fontsize-ensurer.reset-size3.size10, .katex .sizing.reset-size3.size10{font-size:2.96285714em}
+.katex .fontsize-ensurer.reset-size3.size11, .katex .sizing.reset-size3.size11{font-size:3.55428571em}
+.katex .fontsize-ensurer.reset-size4.size1, .katex .sizing.reset-size4.size1{font-size:.625em}
+.katex .fontsize-ensurer.reset-size4.size2, .katex .sizing.reset-size4.size2{font-size:.75em}
+.katex .fontsize-ensurer.reset-size4.size3, .katex .sizing.reset-size4.size3{font-size:.875em}
+.katex .fontsize-ensurer.reset-size4.size4, .katex .sizing.reset-size4.size4{font-size:1em}
+.katex .fontsize-ensurer.reset-size4.size5, .katex .sizing.reset-size4.size5{font-size:1.125em}
+.katex .fontsize-ensurer.reset-size4.size6, .katex .sizing.reset-size4.size6{font-size:1.25em}
+.katex .fontsize-ensurer.reset-size4.size7, .katex .sizing.reset-size4.size7{font-size:1.5em}
+.katex .fontsize-ensurer.reset-size4.size8, .katex .sizing.reset-size4.size8{font-size:1.8em}
+.katex .fontsize-ensurer.reset-size4.size9, .katex .sizing.reset-size4.size9{font-size:2.16em}
+.katex .fontsize-ensurer.reset-size4.size10, .katex .sizing.reset-size4.size10{font-size:2.5925em}
+.katex .fontsize-ensurer.reset-size4.size11, .katex .sizing.reset-size4.size11{font-size:3.11em}
+.katex .fontsize-ensurer.reset-size5.size1, .katex .sizing.reset-size5.size1{font-size:.55555556em}
+.katex .fontsize-ensurer.reset-size5.size2, .katex .sizing.reset-size5.size2{font-size:.66666667em}
+.katex .fontsize-ensurer.reset-size5.size3, .katex .sizing.reset-size5.size3{font-size:.77777778em}
+.katex .fontsize-ensurer.reset-size5.size4, .katex .sizing.reset-size5.size4{font-size:.88888889em}
+.katex .fontsize-ensurer.reset-size5.size5, .katex .sizing.reset-size5.size5{font-size:1em}
+.katex .fontsize-ensurer.reset-size5.size6, .katex .sizing.reset-size5.size6{font-size:1.11111111em}
+.katex .fontsize-ensurer.reset-size5.size7, .katex .sizing.reset-size5.size7{font-size:1.33333333em}
+.katex .fontsize-ensurer.reset-size5.size8, .katex .sizing.reset-size5.size8{font-size:1.6em}
+.katex .fontsize-ensurer.reset-size5.size9, .katex .sizing.reset-size5.size9{font-size:1.92em}
+.katex .fontsize-ensurer.reset-size5.size10, .katex .sizing.reset-size5.size10{font-size:2.30444444em}
+.katex .fontsize-ensurer.reset-size5.size11, .katex .sizing.reset-size5.size11{font-size:2.76444444em}
+.katex .fontsize-ensurer.reset-size6.size1, .katex .sizing.reset-size6.size1{font-size:.5em}
+.katex .fontsize-ensurer.reset-size6.size2, .katex .sizing.reset-size6.size2{font-size:.6em}
+.katex .fontsize-ensurer.reset-size6.size3, .katex .sizing.reset-size6.size3{font-size:.7em}
+.katex .fontsize-ensurer.reset-size6.size4, .katex .sizing.reset-size6.size4{font-size:.8em}
+.katex .fontsize-ensurer.reset-size6.size5, .katex .sizing.reset-size6.size5{font-size:.9em}
+.katex .fontsize-ensurer.reset-size6.size6, .katex .sizing.reset-size6.size6{font-size:1em}
+.katex .fontsize-ensurer.reset-size6.size7, .katex .sizing.reset-size6.size7{font-size:1.2em}
+.katex .fontsize-ensurer.reset-size6.size8, .katex .sizing.reset-size6.size8{font-size:1.44em}
+.katex .fontsize-ensurer.reset-size6.size9, .katex .sizing.reset-size6.size9{font-size:1.728em}
+.katex .fontsize-ensurer.reset-size6.size10, .katex .sizing.reset-size6.size10{font-size:2.074em}
+.katex .fontsize-ensurer.reset-size6.size11, .katex .sizing.reset-size6.size11{font-size:2.488em}
+.katex .fontsize-ensurer.reset-size7.size1, .katex .sizing.reset-size7.size1{font-size:.41666667em}
+.katex .fontsize-ensurer.reset-size7.size2, .katex .sizing.reset-size7.size2{font-size:.5em}
+.katex .fontsize-ensurer.reset-size7.size3, .katex .sizing.reset-size7.size3{font-size:.58333333em}
+.katex .fontsize-ensurer.reset-size7.size4, .katex .sizing.reset-size7.size4{font-size:.66666667em}
+.katex .fontsize-ensurer.reset-size7.size5, .katex .sizing.reset-size7.size5{font-size:.75em}
+.katex .fontsize-ensurer.reset-size7.size6, .katex .sizing.reset-size7.size6{font-size:.83333333em}
+.katex .fontsize-ensurer.reset-size7.size7, .katex .sizing.reset-size7.size7{font-size:1em}
+.katex .fontsize-ensurer.reset-size7.size8, .katex .sizing.reset-size7.size8{font-size:1.2em}
+.katex .fontsize-ensurer.reset-size7.size9, .katex .sizing.reset-size7.size9{font-size:1.44em}
+.katex .fontsize-ensurer.reset-size7.size10, .katex .sizing.reset-size7.size10{font-size:1.72833333em}
+.katex .fontsize-ensurer.reset-size7.size11, .katex .sizing.reset-size7.size11{font-size:2.07333333em}
+.katex .fontsize-ensurer.reset-size8.size1, .katex .sizing.reset-size8.size1{font-size:.34722222em}
+.katex .fontsize-ensurer.reset-size8.size2, .katex .sizing.reset-size8.size2{font-size:.41666667em}
+.katex .fontsize-ensurer.reset-size8.size3, .katex .sizing.reset-size8.size3{font-size:.48611111em}
+.katex .fontsize-ensurer.reset-size8.size4, .katex .sizing.reset-size8.size4{font-size:.55555556em}
+.katex .fontsize-ensurer.reset-size8.size5, .katex .sizing.reset-size8.size5{font-size:.625em}
+.katex .fontsize-ensurer.reset-size8.size6, .katex .sizing.reset-size8.size6{font-size:.69444444em}
+.katex .fontsize-ensurer.reset-size8.size7, .katex .sizing.reset-size8.size7{font-size:.83333333em}
+.katex .fontsize-ensurer.reset-size8.size8, .katex .sizing.reset-size8.size8{font-size:1em}
+.katex .fontsize-ensurer.reset-size8.size9, .katex .sizing.reset-size8.size9{font-size:1.2em}
+.katex .fontsize-ensurer.reset-size8.size10, .katex .sizing.reset-size8.size10{font-size:1.44027778em}
+.katex .fontsize-ensurer.reset-size8.size11, .katex .sizing.reset-size8.size11{font-size:1.72777778em}
+.katex .fontsize-ensurer.reset-size9.size1, .katex .sizing.reset-size9.size1{font-size:.28935185em}
+.katex .fontsize-ensurer.reset-size9.size2, .katex .sizing.reset-size9.size2{font-size:.34722222em}
+.katex .fontsize-ensurer.reset-size9.size3, .katex .sizing.reset-size9.size3{font-size:.40509259em}
+.katex .fontsize-ensurer.reset-size9.size4, .katex .sizing.reset-size9.size4{font-size:.46296296em}
+.katex .fontsize-ensurer.reset-size9.size5, .katex .sizing.reset-size9.size5{font-size:.52083333em}
+.katex .fontsize-ensurer.reset-size9.size6, .katex .sizing.reset-size9.size6{font-size:.5787037em}
+.katex .fontsize-ensurer.reset-size9.size7, .katex .sizing.reset-size9.size7{font-size:.69444444em}
+.katex .fontsize-ensurer.reset-size9.size8, .katex .sizing.reset-size9.size8{font-size:.83333333em}
+.katex .fontsize-ensurer.reset-size9.size9, .katex .sizing.reset-size9.size9{font-size:1em}
+.katex .fontsize-ensurer.reset-size9.size10, .katex .sizing.reset-size9.size10{font-size:1.20023148em}
+.katex .fontsize-ensurer.reset-size9.size11, .katex .sizing.reset-size9.size11{font-size:1.43981481em}
+.katex .fontsize-ensurer.reset-size10.size1, .katex .sizing.reset-size10.size1{font-size:.24108004em}
+.katex .fontsize-ensurer.reset-size10.size2, .katex .sizing.reset-size10.size2{font-size:.28929605em}
+.katex .fontsize-ensurer.reset-size10.size3, .katex .sizing.reset-size10.size3{font-size:.33751205em}
+.katex .fontsize-ensurer.reset-size10.size4, .katex .sizing.reset-size10.size4{font-size:.38572806em}
+.katex .fontsize-ensurer.reset-size10.size5, .katex .sizing.reset-size10.size5{font-size:.43394407em}
+.katex .fontsize-ensurer.reset-size10.size6, .katex .sizing.reset-size10.size6{font-size:.48216008em}
+.katex .fontsize-ensurer.reset-size10.size7, .katex .sizing.reset-size10.size7{font-size:.57859209em}
+.katex .fontsize-ensurer.reset-size10.size8, .katex .sizing.reset-size10.size8{font-size:.69431051em}
+.katex .fontsize-ensurer.reset-size10.size9, .katex .sizing.reset-size10.size9{font-size:.83317261em}
+.katex .fontsize-ensurer.reset-size10.size10, .katex .sizing.reset-size10.size10{font-size:1em}
+.katex .fontsize-ensurer.reset-size10.size11, .katex .sizing.reset-size10.size11{font-size:1.19961427em}
+.katex .fontsize-ensurer.reset-size11.size1, .katex .sizing.reset-size11.size1{font-size:.20096463em}
+.katex .fontsize-ensurer.reset-size11.size2, .katex .sizing.reset-size11.size2{font-size:.24115756em}
+.katex .fontsize-ensurer.reset-size11.size3, .katex .sizing.reset-size11.size3{font-size:.28135048em}
+.katex .fontsize-ensurer.reset-size11.size4, .katex .sizing.reset-size11.size4{font-size:.32154341em}
+.katex .fontsize-ensurer.reset-size11.size5, .katex .sizing.reset-size11.size5{font-size:.36173633em}
+.katex .fontsize-ensurer.reset-size11.size6, .katex .sizing.reset-size11.size6{font-size:.40192926em}
+.katex .fontsize-ensurer.reset-size11.size7, .katex .sizing.reset-size11.size7{font-size:.48231511em}
+.katex .fontsize-ensurer.reset-size11.size8, .katex .sizing.reset-size11.size8{font-size:.57877814em}
+.katex .fontsize-ensurer.reset-size11.size9, .katex .sizing.reset-size11.size9{font-size:.69453376em}
+.katex .fontsize-ensurer.reset-size11.size10, .katex .sizing.reset-size11.size10{font-size:.83360129em}
+.katex .fontsize-ensurer.reset-size11.size11, .katex .sizing.reset-size11.size11{font-size:1em}
+.katex .delimsizing.size1{font-family:KaTeX_Size1}
+.katex .delimsizing.size2{font-family:KaTeX_Size2}
+.katex .delimsizing.size3{font-family:KaTeX_Size3}
+.katex .delimsizing.size4{font-family:KaTeX_Size4}
+.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}
+.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}
+.katex .nulldelimiter{display:inline-block;width:.12em}
+.katex .delimcenter, .katex .op-symbol{position:relative}
+.katex .op-symbol.small-op{font-family:KaTeX_Size1}
+.katex .op-symbol.large-op{font-family:KaTeX_Size2}
+.katex .accent>.vlist-t, .katex .op-limits>.vlist-t{text-align:center}
+.katex .accent .accent-body{position:relative}
+.katex .accent .accent-body:not(.accent-full){width:0}
+.katex .overlay{display:block}
+.katex .mtable .vertical-separator{display:inline-block;min-width:1px}
+.katex .mtable .arraycolsep{display:inline-block}
+.katex .mtable .col-align-c>.vlist-t{text-align:center}
+.katex .mtable .col-align-l>.vlist-t{text-align:left}
+.katex .mtable .col-align-r>.vlist-t{text-align:right}
+.katex .svg-align{text-align:left}
+.katex svg{fill:currentColor;stroke:currentColor;fill-rule:nonzero;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:block;height:inherit;position:absolute;width:100%}
+.katex svg path{stroke:none}
+.katex img{border-style:none;max-height:none;max-width:none;min-height:0;min-width:0}
+.katex .stretchy{display:block;overflow:hidden;position:relative;width:100%}
+.katex .stretchy:after, .katex .stretchy:before{content:""}
+.katex .hide-tail{overflow:hidden;position:relative;width:100%}
+.katex .halfarrow-left{left:0;overflow:hidden;position:absolute;width:50.2%}
+.katex .halfarrow-right{overflow:hidden;position:absolute;right:0;width:50.2%}
+.katex .brace-left{left:0;overflow:hidden;position:absolute;width:25.1%}
+.katex .brace-center{left:25%;overflow:hidden;position:absolute;width:50%}
+.katex .brace-right{overflow:hidden;position:absolute;right:0;width:25.1%}
+.katex .x-arrow-pad{padding:0 .5em}
+.katex .cd-arrow-pad{padding:0 .55556em 0 .27778em}
+.katex .mover, .katex .munder, .katex .x-arrow{text-align:center}
+.katex .boxpad{padding:0 .3em}
+.katex .fbox, .katex .fcolorbox{border:.04em solid;box-sizing:border-box}
+.katex .cancel-pad{padding:0 .2em}
+.katex .cancel-lap{margin-left:-.2em;margin-right:-.2em}
+.katex .sout{border-bottom-style:solid;border-bottom-width:.08em}
+.katex .angl{border-right:.049em solid;border-top:.049em solid;box-sizing:border-box;margin-right:.03889em}
+.katex .anglpad{padding:0 .03889em}
+.katex .eqn-num:before{content:"(" counter(katexEqnNo) ")";counter-increment:katexEqnNo}
+.katex .mml-eqn-num:before{content:"(" counter(mmlEqnNo) ")";counter-increment:mmlEqnNo}
+.katex .mtr-glue{width:50%}
+.katex .cd-vert-arrow{display:inline-block;position:relative}
+.katex .cd-label-left{display:inline-block;position:absolute;right:calc(50% + .3em);text-align:left}
+.katex .cd-label-right{display:inline-block;left:calc(50% + .3em);position:absolute;text-align:right}
+.katex-display{display:block;margin:1em 0;text-align:center}
+.katex-display>.katex{display:block;text-align:center;white-space:nowrap}
+.katex-display>.katex>.katex-html{display:block;position:relative}
+.katex-display>.katex>.katex-html>.tag{position:absolute;right:0}
+.katex-display.leqno>.katex>.katex-html>.tag{left:0;right:auto}
+.katex-display.fleqn>.katex{padding-left:2em;text-align:left}
+.post-body{counter-reset:katexEqnNo mmlEqnNo}
+.katex-display{margin:.5em 0 .9em;overflow-x:auto;overflow-y:hidden;padding:2px 0}
+.katex{font-size:1.05em}</style>
+<div class="post-body"><main>
+<h1>How a backtest lies: proxies, staleness and weighting</h1>
+<p class="sub">The study you think you are running, and the one the data actually runs. Five episodes from two weeks of research on Polymarket's crypto up/down contracts.</p>
+<p class="meta">Research note</p>
+
+<p><b>Abstract.</b> Every backtest swaps something real for something available: inputs as stored rather than as they arrived, fills from a model rather than from the book, and an average over whatever unit the table is keyed on. Each swap can manufacture a result. This note collects the cases where one did in my own research on short-dated crypto binaries.</p>
+
+<div style="border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:0 0 26px;font:15px/1.55 system-ui,sans-serif">
+<div style="font-weight:600;margin-bottom:6px">Key findings</div>
+<ul style="margin:0;padding-left:18px">
+<li>A final-minute taker earned about +1.2¢ per share on a 30-day replay holdout. On recorded oracle inputs and live books it lost money. The edge lived in the proxy.</li>
+<li>Four markets with 13-minute-old inputs carried 96% of a model's advantage over production. Without them the advantage was zero.</li>
+<li>The same forecast beat the market per row and lost to it per market.</li>
+<li>A correct bug fix made the 15-minute model worse, because the bug had been covering a missing basis term.</li>
+</ul></div>
+
+<h2>1. Three substitutions</h2>
+<p>A replay needs three things it rarely has, and every replay in this note substitutes at least one of them.</p>
+<ul>
+<li><b>Inputs.</b> Recorded Chainlink prices, the feed the 15-minute contracts settle on, exist only from 29 October. Before that, almost every historical 15-minute row was priced off Binance spot.</li>
+<li><b>Liquidity.</b> Recorded order books also start on 29 October. Earlier replays fill against later on-chain trades.</li>
+<li><b>Weights.</b> The natural table has one row per second or per fill. The natural sample unit is the market, since all its rows share one outcome, or the day.</li>
+</ul>
+
+<h2>2. An edge that lived in the proxy</h2>
+<p>The 15-minute contracts settle on a 60-second average of the oracle, so in the final minute part of the outcome is already fixed. The pre-registered rule: with 30–60 seconds left, take whichever side the model favours by more than 0.5¢ after fees, 25 shares, one order per market, held to settlement.</p>
+<p>On the replay it worked. Over 58 training days it earned +2.0¢ per share (t 4.2, clustered by day). On the 30-day holdout it earned +1.2¢, which was not significant, and Solana supplied about two-thirds of the profit. The latency profile was the first warning: the edge fell to +0.4¢ at a 3-second delay. An edge that disappears with one more second of delay is an edge about timing.</p>
+<figure><svg id="f1" viewBox="0 0 680 250" role="img" aria-label="Figure 1. The final-minute taker by input source"></svg><figcaption>Figure 1. The same final-minute rule (15-minute contracts, 30–60 seconds left, ¢ per share after fees) as its inputs and fills become real. Replay: Binance spot in place of the oracle, filled against later on-chain trades. Observed inputs: recorded oracle prices and book mids, 29 October – 5 November (8 days). Live books: inputs gated by receipt time and fills against the recorded book, 29–31 October (85 markets in 22 recorded hours, most fills on one day).</figcaption></figure>
+<p>Replacing the proxy removed it. With the oracle as recorded, a model of the same family earned about −0.5¢, with an interval spanning zero. Against recorded live books the rule lost about 2¢ per share over 85 markets. That sample is small, and most of its fills came from one day, so it is evidence against the replay rather than a measurement of the rule. Breaking down its 321 live-book fills: the model saw about 6¢ of edge at the moment of decision, and the book moved about 1¢ against the fill within a quarter of a second.</p>
+<p>The replay differed from reality in three documented ways, and I can't apportion the gap among them:</p>
+<ol>
+<li><b>Basis.</b> Over a window the Binance move differs from the oracle's with a standard deviation of about 0.85 bp, and the replay assumed zero.</li>
+<li><b>Timing.</b> The replay read the proxy at its own timestamp. On the live days the settlement price was a median 2 seconds old when the rule decided.</li>
+<li><b>Liquidity.</b> The replay filled against the next on-chain trade. The live test met the book as it stood, and that book was already moving.</li>
+</ol>
+
+<h2>3. Thirteen-minute-old inputs</h2>
+<p>A research fork of my model claimed a better final-minute forecast than production, the model my paper market maker runs (nothing here traded real money). Before porting anything I joined the two models row by row on the same market and second. On 99% of 111,705 rows they agreed to within 0.3¢. About 0.6% of rows differed by more than 5¢, and they sat in four markets, all between 15:42 and 15:45 UTC on 5 November.</p>
+<p>In those four markets, production's last Chainlink price was 13 minutes old. My research machine's copy of that day's recordings was partial. Production prices whatever print it last received, with no age limit, so it quoted over 99% on outcomes that went the other way. Those four markets carried 96% of the gap.</p>
+<figure><div class="legend"><span class="sw" style="background:var(--neg);"></span>all rows<span class="sw" style="background:var(--pos);"></span>four stale markets removed</div><svg id="f2" viewBox="0 0 680 220" role="img" aria-label="Figure 2. Model gap with and without four stale markets"></svg><figcaption>Figure 2. Log-loss difference (×10⁻³, negative favours the research model) between the research fork and production on identical rows, 15-minute contracts, 29 October – 5 November. Remove four markets on stale inputs and the improvement disappears: the two models are the same model.</figcaption></figure>
+<p>It isn't a one-off. The forward-test taker (paper only) had traded on oracle gaps of up to 675 seconds until I added a guard. Staleness also has a smooth cost: over 26 days of maker-fill instants, delaying every input by 3 seconds made the 15-minute forecast worse on 96% of days, with most of the damage in the last minute.</p>
+<p>The rule I took from this: the age of every input is a column, not an assumption. A row priced on old inputs should be visibly old in the data, and gated, before it reaches any average.</p>
+
+<h2>4. Better per row, worse per market</h2>
+<p>The fork's final-minute model, anchored on the market price and adding the state of the forming average, beat the market by 16 log-loss points per row with 30–60 seconds left (95% interval −34 to −3). Weighted per market it was 3 points <em>worse</em>. This was BTC only, over 8 days, so treat both numbers as thin. An independent reproduction in my main codebase gave the same pair of signs.</p>
+<p>Both numbers are means of the same per-row losses <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord">ℓ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span>, weighted differently. With <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> rows in market <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span> and <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9812em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8312em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord">ℓ</span></span><span style="top:-3.2634em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1389em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> its mean,</p>
+<div class="eq-rows" style="overflow-x:auto;overflow-y:hidden"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msub><mover accent="true"><mi mathvariant="normal">ℓ</mi><mo>ˉ</mo></mover><mtext>row</mtext></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mrow><munder><mo>∑</mo><mi>m</mi></munder><msub><mi>n</mi><mi>m</mi></msub><msub><mover accent="true"><mi mathvariant="normal">ℓ</mi><mo>ˉ</mo></mover><mi>m</mi></msub></mrow><mrow><munder><mo>∑</mo><mi>m</mi></munder><msub><mi>n</mi><mi>m</mi></msub></mrow></mfrac><mo separator="true">,</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msub><mover accent="true"><mi mathvariant="normal">ℓ</mi><mo>ˉ</mo></mover><mtext>mkt</mtext></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mn>1</mn><mi>M</mi></mfrac><munder><mo>∑</mo><mi>m</mi></munder><msub><mover accent="true"><mi mathvariant="normal">ℓ</mi><mo>ˉ</mo></mover><mi>m</mi></msub><mo separator="true">,</mo></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned} \bar{\ell}_{\text{row}} &amp;= \frac{\sum_m n_m \bar{\ell}_m}{\sum_m n_m}, \\[4pt] \bar{\ell}_{\text{mkt}} &amp;= \frac{1}{M}\sum_m \bar{\ell}_m, \end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:5.3781em;vertical-align:-2.439em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.939em;"><span style="top:-4.939em;"><span class="pstrut" style="height:3.5209em;"></span><span class="mord"><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8312em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord">ℓ</span></span><span style="top:-3.2634em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1389em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">row</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.3319em;"><span class="pstrut" style="height:3.5209em;"></span><span class="mord"><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8312em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord">ℓ</span></span><span style="top:-3.2634em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1389em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">mkt</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.439em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.939em;"><span style="top:-4.939em;"><span class="pstrut" style="height:3.5209em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5209em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.0017em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6897em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.0017em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8312em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord">ℓ</span></span><span style="top:-3.2634em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1389em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.9857em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span></span></span><span style="top:-2.3319em;"><span class="pstrut" style="height:3.5209em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.109em;">M</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.9em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.25em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8312em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord">ℓ</span></span><span style="top:-3.2634em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1389em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.439em;"><span></span></span></span></span></span></span></span></span></span></span></span></div>
+<p>so the two diverge exactly when the number of rows a market contributes is correlated with how well the model does on it. Here the gain grew with the share of the end average already fixed, but it didn't reach the typical market. The per-row number describes the mechanism; the per-market number describes what a strategy trading once per market would earn.</p>
+<figure><div class="legend"><span class="sw" style="background:var(--pos);"></span>per row<span class="sw" style="background:var(--neg);"></span>per market</div><svg id="f4" viewBox="0 0 680 220" role="img" aria-label="Figure 3. The same comparison weighted per row and per market"></svg><figcaption>Figure 3. Log-loss difference (×10⁻³, negative favours the candidate) with 30–60 seconds left, 15-minute contracts, BTC only, 29 October – 5 November. Left: the candidate against the market, where the sign flips. Right: against production (these rows still include the four stale markets; the per-row interval spans zero).</figcaption></figure>
+<p>Weighting doesn't bias results in a known direction, so the only safe practice is to report both. Two related cases:</p>
+<ul>
+<li><b>Longshot pricing</b> on 5.5 million on-chain maker fills over 97 days looks calibrated in both wings when weighted by fill, within ±0.6¢, and off by up to 2¢ when weighted by window. Which one is "the" calibration depends on whether you trade fills or windows.</li>
+<li><b>An estimator bug</b> computed t from per-market means while reporting the row mean, producing lines like "+0.62 (t −35.5)". A sign disagreement between an estimate and its own t-statistic is a free diagnostic.</li>
+</ul>
+<p>Row counts are not sample sizes. A 15-minute contract scored every second contributes 900 rows and one outcome.</p>
+
+<h2>5. A fix that made the model worse</h2>
+<p>The variance forecast summed a seasonal profile over whole minutes and floored the partial ones, which inflated the variance close to expiry. Weighting partial minutes by their duration was unambiguously right. Over 88 days, paired on identical rows, the correction improved hourly contracts by 2.4 Brier points (×10⁻⁴; t −10, clustered by market) and made 15-minute contracts <em>worse</em> by 7.3 (t 5.5).</p>
+<p>The explanation was a second error. Hourly contracts settle on the same Binance price the model reads, but 15-minute contracts settle on the oracle, which the historical replay replaced with Binance and no basis. The bug's excess variance had been standing in for that missing basis. Adding the measured basis gained 12.6 points (t −9.4), more than offsetting the 7.3. Had I judged the fix by its first paired test, I would have reverted a correct change and kept two errors.</p>
+<p>A model tuned on a flawed pipeline absorbs the flaws, and fixing any one of them can look like damage. The response is to explain the sign of every change, not just test its significance.</p>
+
+<h2>6. Smaller traps</h2>
+<ul>
+<li><b>A price series that is a mid.</b> The venue's price-history endpoint returns the midpoint, and an empty book prints 0.4995. Offline "edges" computed against it were fake; replays must use real bids and asks or trades.</li>
+<li><b>Look-ahead in a source choice.</b> The replay priced a market off the oracle only if every fill instant had an oracle print, so an outage later in the window switched earlier rows to the proxy. Choosing per instant fixed it.</li>
+<li><b>Joining on the same trade.</b> An early maker replay that filled resting orders against the trade that defined the decision was positive, because orders resting at that trade could have been placed inside the decision lag.</li>
+<li><b>One print per transaction.</b> The venue's trade feed sends a sweep across several price levels as a single print at one level's price. Read naively, sweeps look like fills at one price.</li>
+</ul>
+
+<h2>7. Pre-registration as a filter</h2>
+<p>Before running a test I fix one primary configuration, metric and set of days, and the result is reported whichever way it goes. Three examples:</p>
+<ul>
+<li><b>Second-level maker.</b> The pre-registered primary lost 1.17¢ per filled share on three report days, and each of the three days was negative on its own. Three days is too few for a t-statistic to carry much weight, so I read the per-day signs and the longer run. After I corrected the simulator to expand multi-level prints, the loss shrank to 0.67¢ and the verdict stood; the total across fill types was negative under all five fill models I tried. A confirmatory rerun with revised rules lost 0.87¢ on the report days, with two of three days negative. Over all eight recorded days it lost 1.5¢ per share, and the bootstrap verdict was negative, with a 95% upper bound of −$62 a day.</li>
+<li><b>Strike-fixing window.</b> A pre-registered test of whether the forming opening average adds to the market's price, on 1,602 markets: +0.17 log-loss points per market (interval −0.54 to +0.90). Nothing, with a clean placebo.</li>
+<li><b>Multiplicity, counted.</b> One toxicity study ran about 209 model fits in service of two confirmatory hypotheses. Writing the number of fits down is the cheapest correction for it.</li>
+</ul>
+
+<h2>8. What I do now</h2>
+<ol>
+<li>Gate every input by receipt time, and store its age next to it.</li>
+<li>Replay against recorded books wherever they exist, and say so where they don't.</li>
+<li>Report per-market or per-day results beside per-row ones, and cluster at the outcome's level. With fewer than about ten clusters, show per-cluster results and a bootstrap interval rather than a t-statistic.</li>
+<li>Explain the sign of every model change, not just its t.</li>
+<li>Pre-register the primary test, keep a holdout unread until the rules are fixed, and decide on gates before opening it.</li>
+</ol>
+
+<h2>Limitations</h2>
+<ul>
+<li>Recorded oracle prices and books start on 29 October. Every "real" comparison here rests on at most 8 days, and the live-book taker result mostly on one.</li>
+<li>I can document the three ways the replay differed from reality, but not apportion the taker's gap among them.</li>
+<li>No figure uses data from 6 November onward.</li>
+</ul>
+
+<small class="note">Data: on-chain Polymarket fills from 1 August; my recordings of Polymarket's feeds from 29 October; to 5 November 2026. Log loss ×10⁻³ nats, Brier ×10⁻⁴, profit and loss in ¢ per share after fees. Research only; no strategy here was traded with real money. Not investment advice.</small>
+</main>
+
+</div>
+<script type="text/x-post">
+
+function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+function el(t,a){var e=document.createElementNS('http://www.w3.org/2000/svg',t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function tx(svg,x,y,s,o){o=o||{};var t=el('text',{x:x,y:y,fill:o.fill||cv('--ink2'),'text-anchor':o.anchor||'middle','font-size':o.size||12});t.textContent=s;svg.appendChild(t);return t;}
+function nice(r){var p=Math.pow(10,Math.floor(Math.log10(r))),m=r/p;return(m<1.5?1:m<3.5?2:m<7.5?5:10)*p;}
+function C(n){return n==='pos'?cv('--pos'):n==='neg'?cv('--neg'):n==='neu'?cv('--neu'):n==='ink'?cv('--ink'):n;}
+function fmtv(v,u,lab){if(v==null)return'';if(u==='c'){var d=Math.abs(v*10-Math.round(v*10))<1e-9?1:2;return(v>0&&lab?'+':'')+v.toFixed(d)+'¢';}
+ if(u==='%')return v.toFixed(Math.abs(v)<10&&v%1?1:0)+'%';if(u==='$')return(v<0?'−$':'$')+Math.abs(Math.round(v)).toLocaleString();
+ if(u==='$k')return(v<0?'−$':'$')+Math.abs(v).toFixed(0)+'k';if(u==='bp1')return v.toFixed(1)+' bp';if(u==='bp2')return v.toFixed(2)+' bp';if(u==='sbp1')return(v>0&&lab?'+':'')+v.toFixed(1).replace('-','−')+' bp';if(u==='pct1')return v.toFixed(1)+'%';if(u==='pct2')return v.toFixed(2)+'%';if(u==='n1')return(v>0&&lab?'+':'')+v.toFixed(1).replace('-','−');if(u==='n2')return(v>0&&lab?'+':'')+v.toFixed(2).replace('-','−');if(u==='r2')return v.toFixed(2);if(u==='x')return v.toFixed(1)+'×';if(u==='bp')return(v>0&&lab?'+':'')+Math.round(v)+' bp';if(u==='s')return v+' s';return String(Math.round(v*100)/100);}
+function bars(id,groups,series,opt){var svg=document.getElementById(id);if(!svg)return;var W=680,H=+svg.getAttribute('viewBox').split(' ')[3];
+ var L=60,R=16,T=24,B=opt.padB||52;var vals=[];groups.forEach(function(g){g.v.forEach(function(v){if(v!=null)vals.push(v);});});
+ var lo=Math.min(0,Math.min.apply(null,vals)),hi=Math.max(0,Math.max.apply(null,vals)),sp=hi-lo||1;lo-=(lo<0?sp*.22:0);hi+=sp*.16;sp=hi-lo;
+ var Y=function(v){return T+(hi-v)/sp*(H-T-B);};var gw=(W-L-R)/groups.length,n=series.length,bw=Math.min(opt.bw||60,gw*.72/n),gap=2;
+ var st=nice(sp/4);for(var t=Math.ceil(lo/st)*st;t<=hi+1e-9;t+=st){var y=Y(t);svg.appendChild(el('line',{x1:L,x2:W-R,y1:y,y2:y,stroke:cv('--line')}));tx(svg,L-8,y+4,fmtv(t,opt.u),{anchor:'end',fill:cv('--ink3')});}
+ svg.appendChild(el('line',{x1:L,x2:W-R,y1:Y(0),y2:Y(0),stroke:cv('--ink3'),'stroke-width':1.2}));
+ groups.forEach(function(g,i){var cx=L+gw*(i+.5);g.v.forEach(function(v,j){if(v==null)return;var x=cx-(n*bw+(n-1)*gap)/2+j*(bw+gap),top=Math.min(Y(0),Y(v)),h=Math.abs(Y(v)-Y(0));
+  var c=series[j].c==='sign'?(v>=0?cv('--pos'):cv('--neg')):C(series[j].c);var r=el('rect',{x:x,y:top,width:bw,height:Math.max(h,1.5),rx:3,fill:c});var ti=el('title');ti.textContent=g.l.replace('\n',' ')+(series[j].n?' — '+series[j].n:'')+': '+fmtv(v,opt.u,1);r.appendChild(ti);svg.appendChild(r);
+  if(!opt.nolab)tx(svg,x+bw/2,v>=0?top-6:top+h+14,fmtv(v,opt.u,1),{size:opt.lsize||12,fill:cv('--ink')});});
+  String(g.l).split('\n').forEach(function(s,k){tx(svg,cx,H-B+22+k*15,s,{size:12});});});
+ if(opt.yl)tx(svg,L,T-10,opt.yl,{anchor:'start',size:11,fill:cv('--ink3')});}
+function lines(id,xs,series,opt){var svg=document.getElementById(id);if(!svg)return;var W=680,H=+svg.getAttribute('viewBox').split(' ')[3];var L=60,R=opt.R||16,T=opt.T||24,B=opt.padB||36;
+ var vals=[];series.forEach(function(s){s.y.forEach(function(v){if(v!=null)vals.push(v);});});var lo=opt.lo!=null?opt.lo:Math.min.apply(null,vals),hi=opt.hi!=null?opt.hi:Math.max.apply(null,vals);if(opt.lo==null){var sp0=hi-lo;lo-=sp0*.06;hi+=sp0*.08;}
+ var x0=xs[0],x1=xs[xs.length-1];var X=function(v){return L+(v-x0)/(x1-x0)*(W-L-R);},Y=function(v){return T+(hi-v)/(hi-lo)*(H-T-B);};
+ (opt.bands||[]).forEach(function(b){svg.appendChild(el('rect',{x:X(b[0]),y:T,width:Math.max(X(b[1])-X(b[0]),2),height:H-T-B,fill:cv('--shade')}));if(b[2])tx(svg,(X(b[0])+X(b[1]))/2,T-6-(b[3]||0)*13,b[2],{size:11});});
+ var st=opt.ystep||nice((hi-lo)/4);for(var t=Math.ceil(lo/st)*st;t<=hi+1e-9;t+=st){var y=Y(t);svg.appendChild(el('line',{x1:L,x2:W-R,y1:y,y2:y,stroke:cv('--line')}));tx(svg,L-8,y+4,opt.yf?opt.yf(t):fmtv(t,opt.u),{anchor:'end',fill:cv('--ink3')});}
+ (opt.xt||[]).forEach(function(v){tx(svg,X(v),H-B+16,opt.xf?opt.xf(v):String(v),{fill:cv('--ink3')});});
+ (opt.vl||[]).forEach(function(v){svg.appendChild(el('line',{x1:X(v[0]),x2:X(v[0]),y1:T,y2:H-B,stroke:cv('--ink2'),'stroke-dasharray':'3 3'}));if(v[1])tx(svg,X(v[0])+4,T+12,v[1],{anchor:'start',size:11,fill:cv('--ink')});});
+ (opt.hl||[]).forEach(function(v){svg.appendChild(el('line',{x1:L,x2:W-R,y1:Y(v[0]),y2:Y(v[0]),stroke:cv('--ink2'),'stroke-dasharray':'4 4'}));if(v[1])tx(svg,W-R-2,Y(v[0])-5,v[1],{anchor:'end',size:11});});
+ series.forEach(function(s){var d='',pen=false;for(var i=0;i<xs.length;i++){var v=s.y[i];if(v==null){pen=false;continue;}var px=X(xs[i]).toFixed(1),py=Y(v).toFixed(1);
+  if(s.step&&pen)d+='H'+px+'V'+py;else d+=(pen?'L':'M')+px+' '+py;pen=true;}if(s.step)d+='H'+X(x1).toFixed(1);
+  svg.appendChild(el('path',{d:d,fill:'none',stroke:C(s.c),'stroke-width':s.w||2,'stroke-dasharray':s.dash||''}));
+  if(s.end){var k=s.y.length-1;while(k>0&&s.y[k]==null)k--;tx(svg,X(xs[k])+6,Y(s.y[k])+4,s.end,{anchor:'start',size:12,fill:cv('--ink')});}});
+ (opt.pts||[]).forEach(function(p){svg.appendChild(el('circle',{cx:X(p[0]),cy:Y(p[1]),r:p[2]||3,fill:C(p[3]||'neu'),'fill-opacity':p[4]||.5}));});
+ if(opt.yl)tx(svg,L,T-10,opt.yl,{anchor:'start',size:11,fill:cv('--ink3')});}
+
+
+(function(){
+bars('f1',[{l:'Replay, train\n(58 days)',v:[2.0]},{l:'Replay, holdout\n(30 days)',v:[1.2]},{l:'Holdout at\n3 s latency',v:[0.4]},{l:'Observed\ninputs (8 days)',v:[-0.5]},{l:'Live books\n(85 markets)',v:[-1.9]}],
+ [{c:'sign'}],{u:'c',yl:'¢ per share after fees',bw:70});
+bars('f2',[{l:'30–60 s left',v:[-6.8,-0.21]},{l:'60–120 s left',v:[-29,-0.72]}],
+ [{c:'neg',n:'all rows'},{c:'pos',n:'4 stale markets removed'}],{u:'n2',yl:'log-loss difference ×1e3 (negative favours the fork)',bw:80});
+bars('f4',[{l:'Candidate vs market',v:[-16,3.2]},{l:'Candidate vs production',v:[-11,-21]}],
+ [{c:'pos',n:'per row'},{c:'neg',n:'per market'}],{u:'n1',yl:'log-loss difference ×1e3 (negative favours the candidate)',bw:80});
+
+})();
+</script>

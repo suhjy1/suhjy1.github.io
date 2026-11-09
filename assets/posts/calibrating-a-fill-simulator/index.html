@@ -27,7 +27,7 @@
 
 <p class="sub">What the venue's trade feed hides, which fill model comes closest to on-chain fills, what the queue does between trades, and a correction to what I wrote earlier. Polymarket's crypto up/down books.</p>
 
-<p class="meta">Research note · 7 November 2026</p>
+<p class="meta">Research note</p>
 
 <p><b>Abstract.</b> A passive-strategy simulator has to answer one question: given the recorded book and trades, would my resting order have been filled? On Polymarket the chain is an unusually good referee, because every fill settles on Polygon with one row per resting order touched. I used those rows to audit the public trade feed, compare fill models, and test how the queue moves between trades. One caveat up front: the calibration target is not a real order. It is a model of a resting order built from chain rows, so every calibration ratio below compares two models, not a model against reality. Last, I correct a claim from my earlier posts: the simulator is not conservative.</p>
 
