@@ -24,3 +24,7 @@ Most of my effort goes into making evaluation honest. I pre-register pass rules,
 ## Contact
 
 [GitHub](https://github.com/suhjy1)
+
+## License
+
+Writing and figures on this site are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Code in the linked repositories is MIT licensed.
