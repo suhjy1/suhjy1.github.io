@@ -69,6 +69,12 @@ bundle install
 bash tools/run.sh        # http://127.0.0.1:4000
 ```
 
+## License
+
+- Posts and other site content: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), © Jung Yong Suh. Chirpy shows this
+  under every Markdown post by default, and `_layouts/standalone.html` adds the same notice to standalone HTML posts.
+- Site code: MIT, inherited from `chirpy-starter` (`LICENSE`, © Cotes Chung).
+
 ## Before making anything public
 
 Strip employer-proprietary code, data, parameters, and client names from the condensed repos and posts.

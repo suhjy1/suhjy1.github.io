@@ -25,6 +25,6 @@ Most of my effort goes into making evaluation honest. I pre-register pass rules,
 
 [GitHub](https://github.com/suhjy1)
 
-## License
+## Licensing
 
-Writing and figures on this site are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Code in the linked repositories is MIT licensed.
+Writing on this site is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): you can reuse it with credit. Code in my public repositories is MIT licensed. Third-party market data is never redistributed.
