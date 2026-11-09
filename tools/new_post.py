@@ -8,8 +8,9 @@ Turn any HTML file into a blog post.
         --categories "Research, Prediction Markets" --tags "copulas, pricing" --image cover.png
 
 Two modes (auto-detected, override with --mode):
-  standalone  A full HTML document (<!doctype>/<html>/<body>). Served exactly as-is with its
-              own CSS/JS, plus a small "← back" link. Best for interactive pages and charts.
+  standalone  A full HTML document (<!doctype>/<html>/<body>). Saved as-is to
+              assets/posts/<slug>/ and shown inside the site page (sidebar visible) in a frame
+              that grows to its full height. Add `series: N` to set its order within a project.
   site        An HTML fragment (no <html>/<body>). Wrapped in the Chirpy post layout (sidebar,
               TOC, MathJax, tags), like a Markdown post. Use --mode site on a full document to pull out
               just its <body> (plus any <style>/<script> from <head>) and wrap it in the site.
@@ -133,7 +134,7 @@ def convert(path: Path, a) -> Path:
 
     front = {"title": title, "description": summary, "categories": categories, "tags": tags}
     if mode == "standalone":
-        front["layout"] = "standalone"
+        front["layout"] = "post-embed"  # shown inside the site page; the document itself is served from assets/posts/<slug>/
     if project:
         front["project"] = project
     lines = ["---"] + [f"{k}: {json.dumps(v, ensure_ascii=False)}" for k, v in front.items()]
@@ -141,8 +142,16 @@ def convert(path: Path, a) -> Path:
     if image:
         lines += ["image:", f"  path: {json.dumps(image)}", f"  alt: {json.dumps(title, ensure_ascii=False)}"]
     # Keep Jekyll from splitting the excerpt inside the {% raw %} block.
-    lines += ['excerpt_separator: "<!--jekyll-no-excerpt-->"', "---"]
-    out_text = "\n".join(lines) + "\n{% raw %}\n" + body.strip() + "\n{% endraw %}\n"
+    if mode == "standalone":
+        # Serve the full document as a static file and embed it, so the site sidebar stays visible.
+        doc = ROOT / "assets" / "posts" / slug / "index.html"
+        doc.parent.mkdir(parents=True, exist_ok=True)
+        doc.write_text(body.strip() + "\n", encoding="utf-8")
+        lines += [f"embed: /assets/posts/{slug}/", "---"]
+        out_text = "\n".join(lines) + "\n"
+    else:
+        lines += ['excerpt_separator: "<!--jekyll-no-excerpt-->"', "---"]
+        out_text = "\n".join(lines) + "\n{% raw %}\n" + body.strip() + "\n{% endraw %}\n"
 
     out = POSTS / f"{date}-{slug}.html"
     if out.exists() and not a.force:

@@ -91,3 +91,11 @@ a.project-card {
 /* ── Post cards (Blog tab, project pages) ─────────────────── */
 .post-card-meta { font-size: 0.8rem; color: var(--text-muted-color); }
 .project-related .project-grid { margin-top: 1rem; }
+
+/* ── Embedded posts ───────────────────────────────────────── */
+.post-embed-nav {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 2rem; padding-top: 1rem;
+  border-top: 1px solid var(--main-border-color); font-size: 0.95rem;
+  .next { margin-left: auto; }
+}
+.post-embed-license { font-size: 0.8rem; color: var(--text-muted-color); margin-top: 0.75rem; }

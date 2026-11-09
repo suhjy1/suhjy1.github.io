@@ -1,0 +1,52 @@
+---
+layout: page
+---
+{%- comment -%}
+  A post written as a self-contained HTML document (its own CSS, charts and fonts).
+  The document is served as a static file (`embed:` in front matter) and shown here in a
+  same-origin frame that grows to its full height, so the site sidebar and tabs stay visible
+  and the post keeps its own design.
+{%- endcomment -%}
+<iframe id="post-frame" src="{{ page.embed | relative_url }}" title="{{ page.title | escape }}"
+  style="width:100%;border:0;display:block;min-height:80vh;border-radius:8px" loading="eager"></iframe>
+<noscript><p><a href="{{ page.embed | relative_url }}">Open the post</a></p></noscript>
+
+<nav class="post-embed-nav">
+  {%- assign proj = site.projects | where: "slug", page.project | first -%}
+  <a href="{{ '/blog/' | relative_url }}"><i class="fas fa-pen-nib fa-fw"></i> All posts</a>
+  {%- if proj %}<a href="{{ proj.url | relative_url }}"><i class="fas fa-flask fa-fw"></i> {{ proj.title }}</a>{% endif -%}
+  {%- if page.project and page.series -%}
+    {%- assign series = site.posts | where: "project", page.project | sort: "series" -%}
+    {%- assign next_n = page.series | plus: 1 -%}
+    {%- for po in series -%}{%- if po.series == next_n -%}
+      <a class="next" href="{{ po.url | relative_url }}">Next: {{ po.title }} <i class="fas fa-arrow-right fa-fw"></i></a>
+    {%- endif -%}{%- endfor -%}
+  {%- endif -%}
+</nav>
+<p class="post-embed-license">© {{ site.social.name }} · <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a></p>
+
+<script>
+(function () {
+  var f = document.getElementById('post-frame');
+  function doc() { try { return f.contentDocument; } catch (e) { return null; } }
+  function fit() { var d = doc(); if (d && d.documentElement) f.style.height = d.documentElement.scrollHeight + 'px'; }
+  f.addEventListener('load', function () {
+    var d = doc(); if (!d) return;
+    fit();
+    // Links inside the post open in the main window; in-page anchors scroll the main window.
+    d.querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href');
+      if (h.charAt(0) === '#') {
+        a.addEventListener('click', function (ev) {
+          var el = d.getElementById(decodeURIComponent(h.slice(1))); if (!el) return;
+          ev.preventDefault();
+          window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY + el.getBoundingClientRect().top - 70, behavior: 'smooth' });
+        });
+      } else { a.target = '_top'; }
+    });
+    if (window.ResizeObserver) new ResizeObserver(fit).observe(d.documentElement);
+    setTimeout(fit, 300); setTimeout(fit, 1500);
+  });
+  window.addEventListener('resize', fit);
+})();
+</script>
