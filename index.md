@@ -5,6 +5,10 @@ title: Home
 
 I am a quantitative researcher. This site collects condensed, public versions of my research projects. Each project page covers the question, the method, and what I found, with a link to the code. I evaluate every strategy against pre-registered pass rules and realistic costs, and I report the results whether or not they make money.
 
+## Featured
+
+{% include featured-post.html %}
+
 ## Projects
 
 {% include project-cards.html %}

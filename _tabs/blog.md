@@ -7,6 +7,8 @@ order: 2
 Research notes from my projects. Each one covers a single question in more depth than the project pages: the method, the evidence, and what I concluded.
 {: .projects-intro }
 
+{% include featured-post.html %}
+
 {% assign projects = site.projects | sort: "order" %}
 {% for pr in projects %}
 ## {{ pr.title }}
