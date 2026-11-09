@@ -25,3 +25,8 @@ On my own time, I research systematic trading strategies and build what I need t
 ## Licensing
 
 Writing on this site is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): you can reuse it with credit. Code in my public repositories is MIT licensed. Third-party market data is never redistributed.
+
+## Contact
+
+- LinkedIn: [linkedin.com/in/suhjy1](https://www.linkedin.com/in/suhjy1/)
+- Email: [jungyongsuh1@gmail.com](mailto:jungyongsuh1@gmail.com)
