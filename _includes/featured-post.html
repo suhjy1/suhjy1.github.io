@@ -1,13 +1,7 @@
-{%- comment -%} Wide card for posts with `featured: true` in front matter. {%- endcomment -%}
+{%- comment -%} Preview of each post with `featured: true`: its opening, fading into "Read the full post". {%- endcomment -%}
+<div class="featured-wrap">
 {%- assign featured = site.posts | where: "featured", true -%}
-{%- for po in featured -%}
-<a class="featured-card" href="{{ po.url | relative_url }}">
-  {% if po.image.path %}<div class="featured-cover" style="background-image:url('{{ po.image.path | relative_url }}')" role="img" aria-label="{{ po.title }}"></div>{% endif %}
-  <div class="featured-body">
-    <span class="featured-label"><i class="fas fa-star fa-fw"></i> Featured</span>
-    <div class="featured-title">{{ po.title }}</div>
-    <p>{{ po.description }}</p>
-    <span class="featured-more">Read the post <i class="fas fa-arrow-right fa-fw"></i></span>
-  </div>
-</a>
-{%- endfor -%}
+{%- for po in featured %}
+{% include post-inline.html embed=po.embed preview=true url=po.url %}
+{%- endfor %}
+</div>

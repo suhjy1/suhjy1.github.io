@@ -7,7 +7,9 @@ I am a quantitative researcher. This site collects condensed, public versions of
 
 ## Featured
 
+{::nomarkdown}
 {% include featured-post.html %}
+{:/}
 
 ## Projects
 

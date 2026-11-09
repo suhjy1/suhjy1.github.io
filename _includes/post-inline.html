@@ -1,0 +1,64 @@
+{%- comment -%}
+  Show a post's self-contained HTML inline, in a shadow root (see tools/build_embeds.py).
+  Params: embed (e.g. /assets/posts/<slug>/), preview (true = show the opening only, fading
+  into a "Read the full post" button), url (post URL, for the button).
+  Block comments only in the script: Chirpy minifies pages onto one line.
+{%- endcomment -%}
+<div class="post-inline{% if include.preview %} is-preview{% endif %}">
+<link rel="stylesheet" href="{{ include.embed | relative_url }}fonts.css">
+<div class="post-host" data-src="{{ include.embed | relative_url }}content.html"{% if include.preview %} data-preview="1"{% endif %} style="display:block"></div>
+{%- if include.preview %}
+<div class="post-fade"><a class="post-readmore" href="{{ include.url | relative_url }}">Read the full post <i class="fas fa-arrow-right fa-fw"></i></a></div>
+{%- else %}
+<noscript><p><a href="{{ include.embed | relative_url }}">Open the post</a></p></noscript>
+{%- endif %}
+<script>
+(function () {
+  document.querySelectorAll('.post-host:not([data-loaded])').forEach(function (host) {
+  if (!host.attachShadow) { return; }
+  host.setAttribute('data-loaded', '1');
+  var root = host.attachShadow({ mode: 'open' });
+  function theme() {
+    var m = document.documentElement.getAttribute('data-mode');
+    if (!m) { m = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    host.setAttribute('data-theme', m);
+  }
+  theme();
+  fetch(host.getAttribute('data-src')).then(function (r) { return r.text(); }).then(function (html) {
+    root.innerHTML = html;
+    var wrap = root.querySelector('.post-body') || root;
+    /* the post's scripts were written for a whole page: point their document lookups at the shadow root */
+    var fake = new Proxy(document, {
+      get: function (t, p) {
+        if (p === 'getElementById') { return function (i) { return root.getElementById(i); }; }
+        if (p === 'querySelector') { return function (s) { return root.querySelector(s); }; }
+        if (p === 'querySelectorAll') { return function (s) { return root.querySelectorAll(s); }; }
+        if (p === 'getElementsByClassName') { return function (s) { return wrap.getElementsByClassName(s); }; }
+        if (p === 'getElementsByTagName') { return function (s) { return wrap.getElementsByTagName(s); }; }
+        if (p === 'documentElement') { return host; }
+        if (p === 'body') { return wrap; }
+        var v = t[p];
+        return typeof v === 'function' ? v.bind(t) : v;
+      }
+    });
+    root.querySelectorAll('script[type="text/x-post"]').forEach(function (s) {
+      try { (new Function('document', s.textContent))(fake); } catch (e) { console.error('post script', e); }
+    });
+    /* in-page anchors: scroll the page to the target inside the post */
+    root.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (ev) {
+        var el = root.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+        if (!el) { return; }
+        ev.preventDefault();
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' });
+      });
+    });
+    if (location.hash && !host.hasAttribute('data-preview')) {
+      var target = root.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (target) { target.scrollIntoView(); }
+    }
+  });
+  });
+})();
+</script>
+</div>
