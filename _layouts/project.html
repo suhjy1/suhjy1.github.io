@@ -3,13 +3,11 @@ layout: page
 ---
 {%- comment -%} Detail page for an item in the `_projects` collection. {%- endcomment -%}
 <header class="project-head">
-  <p class="project-crumb"><a href="{{ '/projects/' | relative_url }}"><i class="fas fa-flask fa-fw"></i> Projects</a>
-    {% if page.status %}<span class="project-status">{{ page.status }}</span>{% endif %}</p>
+  <p class="project-crumb"><a href="{{ '/projects/' | relative_url }}"><i class="fas fa-flask fa-fw"></i> Projects</a></p>
   <h1 class="dynamic-title">{{ page.title }}</h1>
   <p class="project-lede">{{ page.summary }}</p>
   <div class="project-facts">
     {% if page.stack %}<span><i class="fas fa-layer-group fa-fw"></i> {{ page.stack | join: ', ' }}</span>{% endif %}
-    {% if page.year %}<span><i class="far fa-calendar fa-fw"></i> {{ page.year }}</span>{% endif %}
     {% if page.repo %}<a href="{{ page.repo }}"><i class="fab fa-github fa-fw"></i> Code</a>{% endif %}
     {% if page.demo %}<a href="{{ page.demo | relative_url }}"><i class="fas fa-play fa-fw"></i> Demo</a>{% endif %}
   </div>

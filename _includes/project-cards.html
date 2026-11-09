@@ -4,10 +4,6 @@
   <a class="project-card" href="{{ pr.url | relative_url }}">
     {% if pr.image %}<div class="project-cover" style="background-image:url('{{ pr.image | relative_url }}')" role="img" aria-label="{{ pr.title }}"></div>{% endif %}
     <div class="project-card-body">
-      <div class="project-card-meta">
-        {% if pr.status %}<span class="project-status">{{ pr.status }}</span>{% endif %}
-        {% if pr.year %}<span>{{ pr.year }}</span>{% endif %}
-      </div>
       <div class="project-card-title">{{ pr.title }}</div>
       <p>{{ pr.summary }}</p>
       {% if pr.tags %}<div class="project-tags">{% for t in pr.tags %}<span>{{ t }}</span>{% endfor %}</div>{% endif %}
