@@ -2,6 +2,6 @@
 <div class="featured-wrap">
 {%- assign featured = site.posts | where: "featured", true -%}
 {%- for po in featured %}
-{% include post-inline.html embed=po.embed preview=true url=po.url %}
+{% include post-inline.html embed=po.embed preview=true url=po.url cut=po.preview_cut %}
 {%- endfor %}
 </div>
