@@ -21,12 +21,7 @@ layout: page
 {% assign related = site.posts | where: "project", page.slug %}
 {% if related.size > 0 %}
 <section class="project-related">
-  <h2>Posts on this project</h2>
-  <ul>
-  {% for post in related %}
-    <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      <span class="text-muted"> · {{ post.date | date: '%b %-d, %Y' }}</span></li>
-  {% endfor %}
-  </ul>
+  <h2>Blog posts on this project</h2>
+  {% include post-cards.html project=page.slug %}
 </section>
 {% endif %}

@@ -9,6 +9,19 @@ I am a quantitative researcher. This site collects condensed, public versions of
 
 {% include project-cards.html %}
 
+## Blog
+
+{% assign projects = site.projects | sort: "order" %}
+{% for pr in projects %}
+**{{ pr.title }}**
+{% assign posts = site.posts | where: "project", pr.slug | sort: "series" %}
+{% for po in posts %}
+{{ po.series }}. [{{ po.title }}]({{ po.url | relative_url }})
+{% endfor %}
+{% endfor %}
+
+All posts, with summaries, are on the [Blog]({{ '/blog/' | relative_url }}) page.
+
 ## Links
 
 - [Stat arb code on GitHub](https://github.com/suhjy1/statarb-portfolio)

@@ -1,0 +1,188 @@
+---
+title: "Calibrating a fill simulator against the blockchain"
+description: "What the venue's trade feed hides, which fill model comes closest to on-chain fills, what the queue does between trades, and a correction to what I wrote earlier."
+date: 2026-11-07 09:00:00
+categories: ["Prediction Markets"]
+tags: ["simulation", "fill models", "polymarket"]
+layout: "standalone"
+project: "crypto-updown"
+image:
+  path: "/assets/img/posts/calibrating-a-fill-simulator/cover.png"
+  alt: "Calibrating a fill simulator against the blockchain"
+excerpt_separator: "<!--jekyll-no-excerpt-->"
+series: 3
+links:
+  - label: "Crypto up/down project"
+    url: /projects/crypto-updown/
+  - label: "Next post"
+    url: /posts/how-a-backtest-lies/
+---
+{% raw %}
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calibrating a fill simulator against the blockchain</title><style>
+  :root { color-scheme: light; --bg:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --ink3:#8a8984; --line:#e6e4dd;
+          --pos:#2a78d6; --neg:#eb6834; --neu:#9c9a92; --card:#f4f3ef; --shade: rgba(120,118,110,.13); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { color-scheme: dark; --bg:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8d8c85; --line:#33322f; --pos:#3987e5; --neg:#d95926; --neu:#7b7a73; --card:#242422; --shade: rgba(200,198,190,.10); } }
+  :root[data-theme="dark"] { color-scheme: dark; --bg:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8d8c85; --line:#33322f; --pos:#3987e5; --neg:#d95926; --neu:#7b7a73; --card:#242422; --shade: rgba(200,198,190,.10); }
+  body { margin:0; background:var(--bg); color:var(--ink); font: 17px/1.65 Georgia, "Times New Roman", serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 16px 80px; }
+  h1 { font-size: 2.0rem; line-height:1.15; margin: 0 0 8px; font-weight: 600; }
+  .sub { color: var(--ink2); font-size: 1.1rem; margin: 0 0 30px; }
+  .meta { font: 13px system-ui, sans-serif; color: var(--ink3); margin: 0 0 28px; }
+  h2 { font-size: 1.3rem; margin: 40px 0 10px; font-weight: 600; }
+  p, ul, ol { margin: 0 0 18px; } li { margin: 0 0 6px; }
+  code { font: 15px ui-monospace, Menlo, monospace; }
+  figure { margin: 26px 0 30px; padding: 16px 16px 10px; background: var(--card); border-radius: 12px; }
+  figcaption { font: 14px/1.5 system-ui, sans-serif; color: var(--ink2); margin-top: 8px; }
+  figure svg { width: 100%; height: auto; display: block; font: 13px system-ui, sans-serif; }
+  .aside { border-left: 3px solid var(--line); padding: 2px 0 2px 16px; color: var(--ink2); margin: 0 0 18px; }
+  .legend { font: 13px system-ui, sans-serif; color: var(--ink2); margin: 0 0 6px; }
+  .sw { display:inline-block; width:10px; height:10px; border-radius:2px; vertical-align:middle; margin: 0 4px 0 10px; }
+  .eq { text-align:center; margin: 0 0 18px; }
+  small.note { display:block; color: var(--ink3); font: 13px/1.5 system-ui, sans-serif; margin-top: 40px; }
+</style></head>
+<body><main>
+<h1>Calibrating a fill simulator against the blockchain</h1>
+
+<p class="sub">What the venue's trade feed hides, which fill model comes closest to on-chain fills, what the queue does between trades, and a correction to what I wrote earlier. Polymarket's crypto up/down books.</p>
+
+<p class="meta">Research note · 7 November 2026</p>
+
+<p><b>Abstract.</b> A passive-strategy simulator has to answer one question: given the recorded book and trades, would my resting order have been filled? On Polymarket the chain is an unusually good referee, because every fill settles on Polygon with one row per resting order touched. I used those rows to audit the public trade feed, compare fill models, and test how the queue moves between trades. One caveat up front: the calibration target is not a real order. It is a model of a resting order built from chain rows, so every calibration ratio below compares two models, not a model against reality. Last, I correct a claim from my earlier posts: the simulator is not conservative.</p>
+
+<div style="border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:0 0 26px;font:15px/1.55 system-ui,sans-serif">
+<div style="font-weight:600;margin-bottom:6px">Key findings</div>
+<ul style="margin:0;padding-left:18px">
+<li>The trade feed sends one print per transaction, sized for the whole transaction. About one print in six took two or more price levels, so a sweep looks like a single large fill at one price.</li>
+<li>Replacing each sweep with its on-chain levels comes closest to the chain-based target (a ratio of about 0.8 on both contract lengths).</li>
+<li>On back-to-back trades at the same price, the maker the first trade stopped at is first in line when filled again, but is filled again only about half to two-thirds of the time. The front of the queue leaves between trades.</li>
+<li>The simulator gives a resting order more fills than the target, and worse ones. My earlier claim that it was conservative is withdrawn. The strategy it tested still loses under every fill model.</li>
+</ul></div>
+
+<h2>1. The chain as referee</h2>
+
+<p>Polymarket's public trades say who took liquidity. The chain says who provided it: each match emits one log per resting order touched, with the maker's wallet, price and size. Over 29 October – 5 November, 97% of on-chain maker fills on recorded markets match a recorded trade.</p>
+
+<p>When replaying history, the fill engine plays the exchange, and the exchange knew exactly which orders it filled. So using chain rows to decide what the simulated exchange did is not look-ahead, as long as the strategy's own inputs stay chain-free. The limit is that the chain describes a sweep about 2 seconds after a live system could have seen it, so chain-based fills exist only in replay, never in paper or live trading.</p>
+
+<h2>2. One print per transaction</h2>
+
+<p>I joined every trade-feed print on 3–4 November, about 244,000 of them, to its transaction's on-chain maker rows. The print's size equals the whole transaction's size every time. For single-level transactions the price matches too. For multi-level sweeps, one price stands for many:</p>
+
+<figure><div class="legend"><span class="sw" style="background:var(--pos);"></span>first level<span class="sw" style="background:var(--neg);"></span>worst level<span class="sw" style="background:var(--neu);"></span>volume-weighted average<span class="sw" style="background:var(--ink);"></span>another level</div><svg aria-label="Figure 1. Which price a multi-level print carries" id="f1" role="img" viewbox="0 0 680 230"></svg><figcaption>Figure 1. The price the trade feed reports for a transaction that took two, or three or more, price levels on chain (share of prints), 3–4 November.</figcaption></figure>
+
+<p>A two-level sweep is usually reported at the first level it took (about 80%). Read naively, every sweep is a large fill at the best price, and that is how my first simulator read it: a print of 400 shares at 62¢ that really took 150 at 62¢ and 250 at 61¢ filled a simulated order at 62¢ as if 400 shares had traded there. The recorded book can't repair this alone, because the recorder keeps size-only changes at most once a second; inferring sweeps from the book found only a small fraction of them.</p>
+
+<h2>3. Prints that arrive after their own book update</h2>
+
+<p>About a quarter of prints arrive after the book row that already moved the best price away from the print's price, typically about 20 ms later. That fits the trade's own book update being published first, though I haven't matched rows to transactions one by one. Either way, a simulator needs a rule for orders inside a level that vanished just before its print. I tried three: fill them whole, fill them by queue accounting, or don't fill them. They barely change the calibration.</p>
+
+<h2>4. Fill models against the chain</h2>
+
+<ul>
+<li><b>Plain.</b> Each print is one price and size. Prints at my price drain the queue ahead of me; a print beyond my price fills me; an opposite order through my price is a separate "cross" channel.</li>
+<li><b>Expanded prints.</b> Each multi-level print is replaced by per-level prints from the transaction's on-chain rows.</li>
+<li><b>Receipt walk.</b> At the print's receipt, walk the recorded book from the best outward by the print's size, never reading the chain. This is the only option available live.</li>
+<li><b>Hybrid.</b> Expanded prints where chain rows exist, the receipt walk elsewhere.</li>
+</ul>
+
+<p><b>The target is a model too.</b> The calibration unit is a synthetic resident: a 10-share order that joins the best and rests for 30 seconds. On the chain side, that resident counts as filled only when the whole visible level prints at its price. That is a modelling choice, not an observed order, so a ratio of 1 means two models agree, not that the simulator matches reality. For each cell (contract length, time left, price band, age of the best) I compare the simulated share of residents filled with the chain-based share, and report the median ratio across cells.</p>
+
+<figure><div class="legend"><span class="sw" style="background:var(--neu);"></span>plain<span class="sw" style="background:var(--pos);"></span>expanded prints<span class="sw" style="background:var(--neg);"></span>receipt walk (three rules)</div><svg aria-label="Figure 2. Simulated vs chain-based fill share by fill model" id="f3" role="img" viewbox="0 0 680 240"></svg><figcaption>Figure 2. Median across cells of simulated / chain-based share of residents filled, 8 days (29 October – 5 November), about 20 cells per contract length. The three receipt-walk rules differ by at most 0.02.</figcaption></figure>
+
+<p>Expanding sweeps comes closest on both contract lengths (about 0.8). The receipt walk, which I expected to be the more faithful model because it uses only what a live system sees, is the worst on hourly contracts (about 0.7). It consumes the recorded book where the chain says the shares went elsewhere. The remaining gap sits mostly at best prices that have stood for more than 30 seconds and in the last minute or two before the close.</p>
+
+<h2>5. A correction: the simulator is not conservative</h2>
+
+<p>In earlier posts I reported that the simulator filled about two-thirds as many residents as the measure, and concluded that its negative verdicts could not come from optimistic fills. Both halves need correcting. Most of the shortfall was an accounting error on the simulator's side, and Figure 2 shows the corrected models. And a fill rate is not the whole story: within each resident's 30-second life, the simulator fills far more often than the measure, and its fills are worse.</p>
+
+<figure><div class="legend"><span class="sw" style="background:var(--pos);"></span>on-chain measure<span class="sw" style="background:var(--neg);"></span>simulator (all fills)</div><svg aria-label="Figure 3. Edge of measured vs simulated fills" id="f4" role="img" viewbox="0 0 680 220"></svg><figcaption>Figure 3. Edge at settlement (¢ per share) of the residents' fills, chain-based measure vs simulator (hybrid model), 8 days. Within a resident's life the measure fills a few percent of residents; the simulator fills a third or more of them, and even its print fills alone are several times the measured rate.</figcaption></figure>
+
+<p>The comparison isn't like for like: the measured resident is filled only when the whole visible level prints, and it has no cross channel. Even so, the gap is large. The reading that fits is the survivorship effect: the extra simulated fills are at levels real makers cancelled before the price went through. A simulated order that can't leave collects exactly the fills real makers avoided.</p>
+
+<p>What survives is the verdict. The strategy from my earlier posts, a maker quoting one tick behind the best, loses under every fill model:</p>
+
+<figure><div class="legend"><span class="sw" style="background:var(--neu);"></span>print line<span class="sw" style="background:var(--neg);"></span>all fills (print + cross)</div><svg aria-label="Figure 4. The one-tick-behind maker under five fill models" id="f5" role="img" viewbox="0 0 680 230"></svg><figcaption>Figure 4. Edge (¢ per share) of the one-tick-behind maker on its three report days (3–5 November), by fill model. Three days is too few for a meaningful t-statistic; the point is the sign. The trade-fill line's sign depends on the fill model; the total does not.</figcaption></figure>
+
+<p>The trade-fill line alone moves from about −1.2¢ under the plain model to between +0.2¢ and +0.9¢ under the receipt walk. Judged on that line under one model, the conclusion would have depended on a modelling choice. The total, dominated by crosses, is −1.5¢ to −1.8¢ under all five. Over all eight days, a confirmatory version of the strategy came out negative under my pre-set bootstrap rule (95% upper bound −$62 a day).</p>
+
+<h2>6. Which way does the queue move?</h2>
+
+<p>The simulator also needs to know how my place in line advances when size disappears without a trade. A drop at my level can come entirely from behind me (my place doesn't change), from everyone in proportion (pro rata), or from the front (my place advances fully).</p>
+
+<p>The chain allows a direct test. Take consecutive maker-filled transactions at the same price within 60 seconds. The last maker filled in the first one is where that trade stopped. With price-time priority and no cancellations ahead of it, that maker must be first for the next trade. If cancellations came only from behind, it would reappear, first, every time it wasn't fully filled.</p>
+
+<table style="width:100%;border-collapse:collapse;font:14px/1.5 system-ui,sans-serif;margin:0 0 18px">
+<tr style="border-bottom:1px solid var(--line);text-align:left"><th>8 days, 29 Oct – 5 Nov</th><th style="text-align:right">pairs of transactions</th><th style="text-align:right">stopped-at maker filled again</th><th style="text-align:right">first, when filled again</th></tr>
+<tr><td>Hourly</td><td style="text-align:right">69,320</td><td style="text-align:right">65–71%</td><td style="text-align:right">96%</td></tr>
+<tr style="border-bottom:1px solid var(--line)"><td>15-minute</td><td style="text-align:right">494,200</td><td style="text-align:right">44–50%</td><td style="text-align:right">92–93%</td></tr>
+</table>
+
+<p>When the stopped-at maker reappears it is first 92–96% of the time, so price-time priority holds. But it reappears only about 45–70% of the time, so the front of the queue leaves between trades. That rules out the behind-only rule. It doesn't separate pro rata from front, because "leaves" also includes makers whose order the first trade happened to exhaust exactly. I use pro rata as the default and run front as the sensitivity bound.</p>
+
+<h2>7. Where this leaves the simulator</h2>
+
+<p>The default is now the hybrid model with pro-rata queue advance. Expanded prints remove the one-print-per-transaction problem instead of modelling around it. The receipt walk covers transactions without chain rows and is what a live system would have to use. Two items are open: replaying a paper engine's own fills through the simulator, which is still unavailable, so every simulated result remains exploratory; and the remaining gap at long-standing best prices and near the close.</p>
+
+<h2>Limitations</h2>
+
+<ul>
+<li>Recorded books start on 29 October: the calibration rests on 8 days and the strategy comparison on 3.</li>
+<li>The calibration target is a model of a resting order, not an observed one.</li>
+<li>The account of the 20 ms gap is an inference from timing, not a row-by-row match.</li>
+<li>The recorder went dark for about a minute at the top of every hour, so the first minute of hourly windows is missing.</li>
+</ul>
+
+<small class="note">Data: my recordings of Polymarket's book and trade feeds and the Polygon chain's OrderFilled logs, 29 October – 5 November 2026. Edges in ¢ per share to settlement, before rebates, Wallets are not identified. Research only; not investment advice.</small>
+</main>
+<script>
+
+function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+function el(t,a){var e=document.createElementNS('http://www.w3.org/2000/svg',t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function tx(svg,x,y,s,o){o=o||{};var t=el('text',{x:x,y:y,fill:o.fill||cv('--ink2'),'text-anchor':o.anchor||'middle','font-size':o.size||12});t.textContent=s;svg.appendChild(t);return t;}
+function nice(r){var p=Math.pow(10,Math.floor(Math.log10(r))),m=r/p;return(m<1.5?1:m<3.5?2:m<7.5?5:10)*p;}
+function C(n){return n==='pos'?cv('--pos'):n==='neg'?cv('--neg'):n==='neu'?cv('--neu'):n==='ink'?cv('--ink'):n;}
+function fmtv(v,u,lab){if(v==null)return'';if(u==='c'){var d=Math.abs(v*10-Math.round(v*10))<1e-9?1:2;return(v>0&&lab?'+':'')+v.toFixed(d)+'¢';}
+ if(u==='%')return v.toFixed(Math.abs(v)<10&&v%1?1:0)+'%';if(u==='$')return(v<0?'−$':'$')+Math.abs(Math.round(v)).toLocaleString();
+ if(u==='$k')return(v<0?'−$':'$')+Math.abs(v).toFixed(0)+'k';if(u==='bp1')return v.toFixed(1)+' bp';if(u==='bp2')return v.toFixed(2)+' bp';if(u==='sbp1')return(v>0&&lab?'+':'')+v.toFixed(1).replace('-','−')+' bp';if(u==='pct1')return v.toFixed(1)+'%';if(u==='pct2')return v.toFixed(2)+'%';if(u==='n1')return(v>0&&lab?'+':'')+v.toFixed(1).replace('-','−');if(u==='n2')return(v>0&&lab?'+':'')+v.toFixed(2).replace('-','−');if(u==='r2')return v.toFixed(2);if(u==='x')return v.toFixed(1)+'×';if(u==='bp')return(v>0&&lab?'+':'')+Math.round(v)+' bp';if(u==='s')return v+' s';return String(Math.round(v*100)/100);}
+function bars(id,groups,series,opt){var svg=document.getElementById(id);if(!svg)return;var W=680,H=+svg.getAttribute('viewBox').split(' ')[3];
+ var L=60,R=16,T=24,B=opt.padB||52;var vals=[];groups.forEach(function(g){g.v.forEach(function(v){if(v!=null)vals.push(v);});});
+ var lo=Math.min(0,Math.min.apply(null,vals)),hi=Math.max(0,Math.max.apply(null,vals)),sp=hi-lo||1;lo-=(lo<0?sp*.22:0);hi+=sp*.16;sp=hi-lo;
+ var Y=function(v){return T+(hi-v)/sp*(H-T-B);};var gw=(W-L-R)/groups.length,n=series.length,bw=Math.min(opt.bw||60,gw*.72/n),gap=2;
+ var st=nice(sp/4);for(var t=Math.ceil(lo/st)*st;t<=hi+1e-9;t+=st){var y=Y(t);svg.appendChild(el('line',{x1:L,x2:W-R,y1:y,y2:y,stroke:cv('--line')}));tx(svg,L-8,y+4,fmtv(t,opt.u),{anchor:'end',fill:cv('--ink3')});}
+ svg.appendChild(el('line',{x1:L,x2:W-R,y1:Y(0),y2:Y(0),stroke:cv('--ink3'),'stroke-width':1.2}));
+ groups.forEach(function(g,i){var cx=L+gw*(i+.5);g.v.forEach(function(v,j){if(v==null)return;var x=cx-(n*bw+(n-1)*gap)/2+j*(bw+gap),top=Math.min(Y(0),Y(v)),h=Math.abs(Y(v)-Y(0));
+  var c=series[j].c==='sign'?(v>=0?cv('--pos'):cv('--neg')):C(series[j].c);var r=el('rect',{x:x,y:top,width:bw,height:Math.max(h,1.5),rx:3,fill:c});var ti=el('title');ti.textContent=g.l.replace('\n',' ')+(series[j].n?' — '+series[j].n:'')+': '+fmtv(v,opt.u,1);r.appendChild(ti);svg.appendChild(r);
+  if(!opt.nolab)tx(svg,x+bw/2,v>=0?top-6:top+h+14,fmtv(v,opt.u,1),{size:opt.lsize||12,fill:cv('--ink')});});
+  String(g.l).split('\n').forEach(function(s,k){tx(svg,cx,H-B+22+k*15,s,{size:12});});});
+ if(opt.yl)tx(svg,L,T-10,opt.yl,{anchor:'start',size:11,fill:cv('--ink3')});}
+function lines(id,xs,series,opt){var svg=document.getElementById(id);if(!svg)return;var W=680,H=+svg.getAttribute('viewBox').split(' ')[3];var L=60,R=opt.R||16,T=opt.T||24,B=opt.padB||36;
+ var vals=[];series.forEach(function(s){s.y.forEach(function(v){if(v!=null)vals.push(v);});});var lo=opt.lo!=null?opt.lo:Math.min.apply(null,vals),hi=opt.hi!=null?opt.hi:Math.max.apply(null,vals);if(opt.lo==null){var sp0=hi-lo;lo-=sp0*.06;hi+=sp0*.08;}
+ var x0=xs[0],x1=xs[xs.length-1];var X=function(v){return L+(v-x0)/(x1-x0)*(W-L-R);},Y=function(v){return T+(hi-v)/(hi-lo)*(H-T-B);};
+ (opt.bands||[]).forEach(function(b){svg.appendChild(el('rect',{x:X(b[0]),y:T,width:Math.max(X(b[1])-X(b[0]),2),height:H-T-B,fill:cv('--shade')}));if(b[2])tx(svg,(X(b[0])+X(b[1]))/2,T-6-(b[3]||0)*13,b[2],{size:11});});
+ var st=opt.ystep||nice((hi-lo)/4);for(var t=Math.ceil(lo/st)*st;t<=hi+1e-9;t+=st){var y=Y(t);svg.appendChild(el('line',{x1:L,x2:W-R,y1:y,y2:y,stroke:cv('--line')}));tx(svg,L-8,y+4,opt.yf?opt.yf(t):fmtv(t,opt.u),{anchor:'end',fill:cv('--ink3')});}
+ (opt.xt||[]).forEach(function(v){tx(svg,X(v),H-B+16,opt.xf?opt.xf(v):String(v),{fill:cv('--ink3')});});
+ (opt.vl||[]).forEach(function(v){svg.appendChild(el('line',{x1:X(v[0]),x2:X(v[0]),y1:T,y2:H-B,stroke:cv('--ink2'),'stroke-dasharray':'3 3'}));if(v[1])tx(svg,X(v[0])+4,T+12,v[1],{anchor:'start',size:11,fill:cv('--ink')});});
+ (opt.hl||[]).forEach(function(v){svg.appendChild(el('line',{x1:L,x2:W-R,y1:Y(v[0]),y2:Y(v[0]),stroke:cv('--ink2'),'stroke-dasharray':'4 4'}));if(v[1])tx(svg,W-R-2,Y(v[0])-5,v[1],{anchor:'end',size:11});});
+ series.forEach(function(s){var d='',pen=false;for(var i=0;i<xs.length;i++){var v=s.y[i];if(v==null){pen=false;continue;}var px=X(xs[i]).toFixed(1),py=Y(v).toFixed(1);
+  if(s.step&&pen)d+='H'+px+'V'+py;else d+=(pen?'L':'M')+px+' '+py;pen=true;}if(s.step)d+='H'+X(x1).toFixed(1);
+  svg.appendChild(el('path',{d:d,fill:'none',stroke:C(s.c),'stroke-width':s.w||2,'stroke-dasharray':s.dash||''}));
+  if(s.end){var k=s.y.length-1;while(k>0&&s.y[k]==null)k--;tx(svg,X(xs[k])+6,Y(s.y[k])+4,s.end,{anchor:'start',size:12,fill:cv('--ink')});}});
+ (opt.pts||[]).forEach(function(p){svg.appendChild(el('circle',{cx:X(p[0]),cy:Y(p[1]),r:p[2]||3,fill:C(p[3]||'neu'),'fill-opacity':p[4]||.5}));});
+ if(opt.yl)tx(svg,L,T-10,opt.yl,{anchor:'start',size:11,fill:cv('--ink3')});}
+
+
+(function(){
+bars('f1',[{l:'15-min,\n2 levels',v:[80.6,15.7,1.9,1.7]},{l:'15-min,\n3+ levels',v:[29.0,28.7,18.4,23.9]},{l:'Hourly,\n2 levels',v:[76.7,18.6,3.2,1.5]},{l:'Hourly,\n3+ levels',v:[23.6,30.8,20.2,25.4]}],
+ [{c:'pos',n:'first level'},{c:'neg',n:'worst level'},{c:'neu',n:'VWAP'},{c:'ink',n:'another level'}],{u:'%',yl:'share of multi-level prints, by the price reported',bw:30,lsize:11});
+bars('f3',[{l:'Hourly',v:[0.75,0.84,0.70,0.72,0.70]},{l:'15-minute',v:[0.80,0.82,0.80,0.82,0.80]}],
+ [{c:'neu',n:'plain'},{c:'pos',n:'expanded prints'},{c:'neg',n:'receipt walk, fill whole'},{c:'neg',n:'receipt walk, queue'},{c:'neg',n:'receipt walk, no fill'}],{u:'r2',yl:'median simulated / on-chain fill share (1 = calibrated)',bw:40});
+bars('f4',[{l:'Hourly',v:[0.77,-1.95]},{l:'15-minute',v:[0.17,-2.42]}],
+ [{c:'pos',n:'on-chain measure'},{c:'neg',n:'simulator'}],{u:'c',yl:'edge at settlement, ¢ per share',bw:70});
+bars('f5',[{l:'plain',v:[-1.17,-1.78]},{l:'expanded\nprints',v:[-0.67,-1.64]},{l:'receipt,\nfill whole',v:[0.39,-1.45]},{l:'receipt,\nqueue',v:[0.16,-1.55]},{l:'receipt,\nno fill',v:[0.92,-1.74]}],
+ [{c:'neu',n:'print line'},{c:'neg',n:'all fills'}],{u:'c',yl:'¢ per share, report days 3–5 November',bw:40});
+
+})();
+</script></body></html>
+{% endraw %}

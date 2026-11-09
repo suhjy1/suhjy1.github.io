@@ -1,0 +1,14 @@
+{%- comment -%} Cards for one project's posts, in series order. Usage: {% include post-cards.html project="stat-arb" %} {%- endcomment -%}
+{%- assign posts = site.posts | where: "project", include.project | sort: "series" -%}
+<div class="project-grid">
+{% for po in posts %}
+  <a class="project-card" href="{{ po.url | relative_url }}">
+    {% if po.image.path %}<div class="project-cover" style="background-image:url('{{ po.image.path | relative_url }}')" role="img" aria-label="{{ po.title }}"></div>{% endif %}
+    <div class="project-card-body">
+      <div class="post-card-meta">{% if po.series %}Part {{ po.series }} of {{ posts.size }} · {% endif %}{{ po.date | date: "%b %-d, %Y" }}</div>
+      <div class="project-card-title">{{ po.title }}</div>
+      <p>{{ po.description }}</p>
+    </div>
+  </a>
+{% endfor %}
+</div>
