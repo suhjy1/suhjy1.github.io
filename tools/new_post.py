@@ -134,7 +134,7 @@ def convert(path: Path, a) -> Path:
 
     front = {"title": title, "description": summary, "categories": categories, "tags": tags}
     if mode == "standalone":
-        front["layout"] = "post-embed"  # shown inside the site page; the document itself is served from assets/posts/<slug>/
+        front["layout"] = "post"  # shown inside the site page; the document itself is served from assets/posts/<slug>/
     if project:
         front["project"] = project
     lines = ["---"] + [f"{k}: {json.dumps(v, ensure_ascii=False)}" for k, v in front.items()]

@@ -7,9 +7,15 @@ layout: page
   fonts.css. This layout loads content.html into a shadow root placed directly in the page,
   so the post keeps its own design, site styles don't leak in, and the page scrolls exactly
   like any other page. The post's chart scripts run against the shadow root.
-  Inline scripts here must use block comments only: Chirpy minifies pages onto one line.
+  This file overrides Chirpy's own post layout (so the top bar reads "Post"); posts without
+  `embed:` fall back to plain content. Inline scripts: block comments only (pages are minified).
 {%- endcomment -%}
+{% if page.embed %}
 {% include post-inline.html embed=page.embed %}
+{% else %}
+<h1 data-toc-skip>{{ page.title }}</h1>
+<div class="content">{{ content }}</div>
+{% endif %}
 
 <nav class="post-embed-nav">
   {%- assign proj = site.projects | where: "slug", page.project | first -%}
