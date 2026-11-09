@@ -11,7 +11,8 @@ layout: page
   `embed:` fall back to plain content. Inline scripts: block comments only (pages are minified).
 {%- endcomment -%}
 {% if page.embed %}
-{% include post-inline.html embed=page.embed %}
+{%- assign slug = page.embed | split: "/" | last -%}
+{% include post-inline.html embed=page.embed body=slug %}
 {% else %}
 <h1 data-toc-skip>{{ page.title }}</h1>
 <div class="content">{{ content }}</div>

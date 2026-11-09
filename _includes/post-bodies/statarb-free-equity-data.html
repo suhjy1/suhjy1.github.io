@@ -1,0 +1,513 @@
+{% raw %}<style>.katex{font:normal 1.21em KaTeX_Main,Times New Roman,serif;line-height:1.2;position:relative;text-indent:0;text-rendering:auto}
+.katex *{-ms-high-contrast-adjust:none!important;border-color:currentColor}
+.katex .katex-version:after{content:"0.16.47"}
+.katex .katex-mathml{border:0;-webkit-clip-path:inset(50%);clip-path:inset(50%);height:1px;overflow:hidden;padding:0;position:absolute;width:1px}
+.katex .katex-html>.newline{display:block}
+.katex .base{position:relative;white-space:nowrap;width:-webkit-min-content;width:-moz-min-content;width:min-content}
+.katex .base, .katex .strut{display:inline-block}
+.katex .textbf{font-weight:700}
+.katex .textit{font-style:italic}
+.katex .textrm{font-family:KaTeX_Main}
+.katex .textsf{font-family:KaTeX_SansSerif}
+.katex .texttt{font-family:KaTeX_Typewriter}
+.katex .mathnormal{font-family:KaTeX_Math;font-style:italic}
+.katex .mathit{font-family:KaTeX_Main;font-style:italic}
+.katex .mathrm{font-style:normal}
+.katex .mathbf{font-family:KaTeX_Main;font-weight:700}
+.katex .boldsymbol{font-family:KaTeX_Math;font-style:italic;font-weight:700}
+.katex .amsrm, .katex .mathbb, .katex .textbb{font-family:KaTeX_AMS}
+.katex .mathcal{font-family:KaTeX_Caligraphic}
+.katex .mathfrak, .katex .textfrak{font-family:KaTeX_Fraktur}
+.katex .mathboldfrak, .katex .textboldfrak{font-family:KaTeX_Fraktur;font-weight:700}
+.katex .mathtt{font-family:KaTeX_Typewriter}
+.katex .mathscr, .katex .textscr{font-family:KaTeX_Script}
+.katex .mathsf, .katex .textsf{font-family:KaTeX_SansSerif}
+.katex .mathboldsf, .katex .textboldsf{font-family:KaTeX_SansSerif;font-weight:700}
+.katex .mathitsf, .katex .mathsfit, .katex .textitsf{font-family:KaTeX_SansSerif;font-style:italic}
+.katex .mainrm{font-family:KaTeX_Main;font-style:normal}
+.katex .vlist-t{border-collapse:collapse;display:inline-table;table-layout:fixed}
+.katex .vlist-r{display:table-row}
+.katex .vlist{display:table-cell;position:relative;vertical-align:bottom}
+.katex .vlist>span{display:block;height:0;position:relative}
+.katex .vlist>span>span{display:inline-block}
+.katex .vlist>span>.pstrut{overflow:hidden;width:0}
+.katex .vlist-t2{margin-right:-2px}
+.katex .vlist-s{display:table-cell;font-size:1px;min-width:2px;vertical-align:bottom;width:2px}
+.katex .vbox{align-items:baseline;display:inline-flex;flex-direction:column}
+.katex .hbox{width:100%}
+.katex .hbox, .katex .thinbox{display:inline-flex;flex-direction:row}
+.katex .thinbox{max-width:0;width:0}
+.katex .msupsub{text-align:left}
+.katex .mfrac>span>span{text-align:center}
+.katex .mfrac .frac-line{border-bottom-style:solid;display:inline-block;width:100%}
+.katex .hdashline, .katex .hline, .katex .mfrac .frac-line, .katex .overline .overline-line, .katex .rule, .katex .underline .underline-line{min-height:1px}
+.katex .mspace{display:inline-block}
+.katex .smash{display:inline;line-height:0}
+.katex .clap, .katex .llap, .katex .rlap{position:relative;width:0}
+.katex .clap>.inner, .katex .llap>.inner, .katex .rlap>.inner{position:absolute}
+.katex .clap>.fix, .katex .llap>.fix, .katex .rlap>.fix{display:inline-block}
+.katex .llap>.inner{right:0}
+.katex .clap>.inner, .katex .rlap>.inner{left:0}
+.katex .clap>.inner>span{margin-left:-50%;margin-right:50%}
+.katex .rule{border:0 solid;display:inline-block;position:relative}
+.katex .hline, .katex .overline .overline-line, .katex .underline .underline-line{border-bottom-style:solid;display:inline-block;width:100%}
+.katex .hdashline{border-bottom-style:dashed;display:inline-block;width:100%}
+.katex .sqrt>.root{margin-left:.2777777778em;margin-right:-.5555555556em}
+.katex .fontsize-ensurer.reset-size1.size1, .katex .sizing.reset-size1.size1{font-size:1em}
+.katex .fontsize-ensurer.reset-size1.size2, .katex .sizing.reset-size1.size2{font-size:1.2em}
+.katex .fontsize-ensurer.reset-size1.size3, .katex .sizing.reset-size1.size3{font-size:1.4em}
+.katex .fontsize-ensurer.reset-size1.size4, .katex .sizing.reset-size1.size4{font-size:1.6em}
+.katex .fontsize-ensurer.reset-size1.size5, .katex .sizing.reset-size1.size5{font-size:1.8em}
+.katex .fontsize-ensurer.reset-size1.size6, .katex .sizing.reset-size1.size6{font-size:2em}
+.katex .fontsize-ensurer.reset-size1.size7, .katex .sizing.reset-size1.size7{font-size:2.4em}
+.katex .fontsize-ensurer.reset-size1.size8, .katex .sizing.reset-size1.size8{font-size:2.88em}
+.katex .fontsize-ensurer.reset-size1.size9, .katex .sizing.reset-size1.size9{font-size:3.456em}
+.katex .fontsize-ensurer.reset-size1.size10, .katex .sizing.reset-size1.size10{font-size:4.148em}
+.katex .fontsize-ensurer.reset-size1.size11, .katex .sizing.reset-size1.size11{font-size:4.976em}
+.katex .fontsize-ensurer.reset-size2.size1, .katex .sizing.reset-size2.size1{font-size:.8333333333em}
+.katex .fontsize-ensurer.reset-size2.size2, .katex .sizing.reset-size2.size2{font-size:1em}
+.katex .fontsize-ensurer.reset-size2.size3, .katex .sizing.reset-size2.size3{font-size:1.1666666667em}
+.katex .fontsize-ensurer.reset-size2.size4, .katex .sizing.reset-size2.size4{font-size:1.3333333333em}
+.katex .fontsize-ensurer.reset-size2.size5, .katex .sizing.reset-size2.size5{font-size:1.5em}
+.katex .fontsize-ensurer.reset-size2.size6, .katex .sizing.reset-size2.size6{font-size:1.6666666667em}
+.katex .fontsize-ensurer.reset-size2.size7, .katex .sizing.reset-size2.size7{font-size:2em}
+.katex .fontsize-ensurer.reset-size2.size8, .katex .sizing.reset-size2.size8{font-size:2.4em}
+.katex .fontsize-ensurer.reset-size2.size9, .katex .sizing.reset-size2.size9{font-size:2.88em}
+.katex .fontsize-ensurer.reset-size2.size10, .katex .sizing.reset-size2.size10{font-size:3.4566666667em}
+.katex .fontsize-ensurer.reset-size2.size11, .katex .sizing.reset-size2.size11{font-size:4.1466666667em}
+.katex .fontsize-ensurer.reset-size3.size1, .katex .sizing.reset-size3.size1{font-size:.7142857143em}
+.katex .fontsize-ensurer.reset-size3.size2, .katex .sizing.reset-size3.size2{font-size:.8571428571em}
+.katex .fontsize-ensurer.reset-size3.size3, .katex .sizing.reset-size3.size3{font-size:1em}
+.katex .fontsize-ensurer.reset-size3.size4, .katex .sizing.reset-size3.size4{font-size:1.1428571429em}
+.katex .fontsize-ensurer.reset-size3.size5, .katex .sizing.reset-size3.size5{font-size:1.2857142857em}
+.katex .fontsize-ensurer.reset-size3.size6, .katex .sizing.reset-size3.size6{font-size:1.4285714286em}
+.katex .fontsize-ensurer.reset-size3.size7, .katex .sizing.reset-size3.size7{font-size:1.7142857143em}
+.katex .fontsize-ensurer.reset-size3.size8, .katex .sizing.reset-size3.size8{font-size:2.0571428571em}
+.katex .fontsize-ensurer.reset-size3.size9, .katex .sizing.reset-size3.size9{font-size:2.4685714286em}
+.katex .fontsize-ensurer.reset-size3.size10, .katex .sizing.reset-size3.size10{font-size:2.9628571429em}
+.katex .fontsize-ensurer.reset-size3.size11, .katex .sizing.reset-size3.size11{font-size:3.5542857143em}
+.katex .fontsize-ensurer.reset-size4.size1, .katex .sizing.reset-size4.size1{font-size:.625em}
+.katex .fontsize-ensurer.reset-size4.size2, .katex .sizing.reset-size4.size2{font-size:.75em}
+.katex .fontsize-ensurer.reset-size4.size3, .katex .sizing.reset-size4.size3{font-size:.875em}
+.katex .fontsize-ensurer.reset-size4.size4, .katex .sizing.reset-size4.size4{font-size:1em}
+.katex .fontsize-ensurer.reset-size4.size5, .katex .sizing.reset-size4.size5{font-size:1.125em}
+.katex .fontsize-ensurer.reset-size4.size6, .katex .sizing.reset-size4.size6{font-size:1.25em}
+.katex .fontsize-ensurer.reset-size4.size7, .katex .sizing.reset-size4.size7{font-size:1.5em}
+.katex .fontsize-ensurer.reset-size4.size8, .katex .sizing.reset-size4.size8{font-size:1.8em}
+.katex .fontsize-ensurer.reset-size4.size9, .katex .sizing.reset-size4.size9{font-size:2.16em}
+.katex .fontsize-ensurer.reset-size4.size10, .katex .sizing.reset-size4.size10{font-size:2.5925em}
+.katex .fontsize-ensurer.reset-size4.size11, .katex .sizing.reset-size4.size11{font-size:3.11em}
+.katex .fontsize-ensurer.reset-size5.size1, .katex .sizing.reset-size5.size1{font-size:.5555555556em}
+.katex .fontsize-ensurer.reset-size5.size2, .katex .sizing.reset-size5.size2{font-size:.6666666667em}
+.katex .fontsize-ensurer.reset-size5.size3, .katex .sizing.reset-size5.size3{font-size:.7777777778em}
+.katex .fontsize-ensurer.reset-size5.size4, .katex .sizing.reset-size5.size4{font-size:.8888888889em}
+.katex .fontsize-ensurer.reset-size5.size5, .katex .sizing.reset-size5.size5{font-size:1em}
+.katex .fontsize-ensurer.reset-size5.size6, .katex .sizing.reset-size5.size6{font-size:1.1111111111em}
+.katex .fontsize-ensurer.reset-size5.size7, .katex .sizing.reset-size5.size7{font-size:1.3333333333em}
+.katex .fontsize-ensurer.reset-size5.size8, .katex .sizing.reset-size5.size8{font-size:1.6em}
+.katex .fontsize-ensurer.reset-size5.size9, .katex .sizing.reset-size5.size9{font-size:1.92em}
+.katex .fontsize-ensurer.reset-size5.size10, .katex .sizing.reset-size5.size10{font-size:2.3044444444em}
+.katex .fontsize-ensurer.reset-size5.size11, .katex .sizing.reset-size5.size11{font-size:2.7644444444em}
+.katex .fontsize-ensurer.reset-size6.size1, .katex .sizing.reset-size6.size1{font-size:.5em}
+.katex .fontsize-ensurer.reset-size6.size2, .katex .sizing.reset-size6.size2{font-size:.6em}
+.katex .fontsize-ensurer.reset-size6.size3, .katex .sizing.reset-size6.size3{font-size:.7em}
+.katex .fontsize-ensurer.reset-size6.size4, .katex .sizing.reset-size6.size4{font-size:.8em}
+.katex .fontsize-ensurer.reset-size6.size5, .katex .sizing.reset-size6.size5{font-size:.9em}
+.katex .fontsize-ensurer.reset-size6.size6, .katex .sizing.reset-size6.size6{font-size:1em}
+.katex .fontsize-ensurer.reset-size6.size7, .katex .sizing.reset-size6.size7{font-size:1.2em}
+.katex .fontsize-ensurer.reset-size6.size8, .katex .sizing.reset-size6.size8{font-size:1.44em}
+.katex .fontsize-ensurer.reset-size6.size9, .katex .sizing.reset-size6.size9{font-size:1.728em}
+.katex .fontsize-ensurer.reset-size6.size10, .katex .sizing.reset-size6.size10{font-size:2.074em}
+.katex .fontsize-ensurer.reset-size6.size11, .katex .sizing.reset-size6.size11{font-size:2.488em}
+.katex .fontsize-ensurer.reset-size7.size1, .katex .sizing.reset-size7.size1{font-size:.4166666667em}
+.katex .fontsize-ensurer.reset-size7.size2, .katex .sizing.reset-size7.size2{font-size:.5em}
+.katex .fontsize-ensurer.reset-size7.size3, .katex .sizing.reset-size7.size3{font-size:.5833333333em}
+.katex .fontsize-ensurer.reset-size7.size4, .katex .sizing.reset-size7.size4{font-size:.6666666667em}
+.katex .fontsize-ensurer.reset-size7.size5, .katex .sizing.reset-size7.size5{font-size:.75em}
+.katex .fontsize-ensurer.reset-size7.size6, .katex .sizing.reset-size7.size6{font-size:.8333333333em}
+.katex .fontsize-ensurer.reset-size7.size7, .katex .sizing.reset-size7.size7{font-size:1em}
+.katex .fontsize-ensurer.reset-size7.size8, .katex .sizing.reset-size7.size8{font-size:1.2em}
+.katex .fontsize-ensurer.reset-size7.size9, .katex .sizing.reset-size7.size9{font-size:1.44em}
+.katex .fontsize-ensurer.reset-size7.size10, .katex .sizing.reset-size7.size10{font-size:1.7283333333em}
+.katex .fontsize-ensurer.reset-size7.size11, .katex .sizing.reset-size7.size11{font-size:2.0733333333em}
+.katex .fontsize-ensurer.reset-size8.size1, .katex .sizing.reset-size8.size1{font-size:.3472222222em}
+.katex .fontsize-ensurer.reset-size8.size2, .katex .sizing.reset-size8.size2{font-size:.4166666667em}
+.katex .fontsize-ensurer.reset-size8.size3, .katex .sizing.reset-size8.size3{font-size:.4861111111em}
+.katex .fontsize-ensurer.reset-size8.size4, .katex .sizing.reset-size8.size4{font-size:.5555555556em}
+.katex .fontsize-ensurer.reset-size8.size5, .katex .sizing.reset-size8.size5{font-size:.625em}
+.katex .fontsize-ensurer.reset-size8.size6, .katex .sizing.reset-size8.size6{font-size:.6944444444em}
+.katex .fontsize-ensurer.reset-size8.size7, .katex .sizing.reset-size8.size7{font-size:.8333333333em}
+.katex .fontsize-ensurer.reset-size8.size8, .katex .sizing.reset-size8.size8{font-size:1em}
+.katex .fontsize-ensurer.reset-size8.size9, .katex .sizing.reset-size8.size9{font-size:1.2em}
+.katex .fontsize-ensurer.reset-size8.size10, .katex .sizing.reset-size8.size10{font-size:1.4402777778em}
+.katex .fontsize-ensurer.reset-size8.size11, .katex .sizing.reset-size8.size11{font-size:1.7277777778em}
+.katex .fontsize-ensurer.reset-size9.size1, .katex .sizing.reset-size9.size1{font-size:.2893518519em}
+.katex .fontsize-ensurer.reset-size9.size2, .katex .sizing.reset-size9.size2{font-size:.3472222222em}
+.katex .fontsize-ensurer.reset-size9.size3, .katex .sizing.reset-size9.size3{font-size:.4050925926em}
+.katex .fontsize-ensurer.reset-size9.size4, .katex .sizing.reset-size9.size4{font-size:.462962963em}
+.katex .fontsize-ensurer.reset-size9.size5, .katex .sizing.reset-size9.size5{font-size:.5208333333em}
+.katex .fontsize-ensurer.reset-size9.size6, .katex .sizing.reset-size9.size6{font-size:.5787037037em}
+.katex .fontsize-ensurer.reset-size9.size7, .katex .sizing.reset-size9.size7{font-size:.6944444444em}
+.katex .fontsize-ensurer.reset-size9.size8, .katex .sizing.reset-size9.size8{font-size:.8333333333em}
+.katex .fontsize-ensurer.reset-size9.size9, .katex .sizing.reset-size9.size9{font-size:1em}
+.katex .fontsize-ensurer.reset-size9.size10, .katex .sizing.reset-size9.size10{font-size:1.2002314815em}
+.katex .fontsize-ensurer.reset-size9.size11, .katex .sizing.reset-size9.size11{font-size:1.4398148148em}
+.katex .fontsize-ensurer.reset-size10.size1, .katex .sizing.reset-size10.size1{font-size:.2410800386em}
+.katex .fontsize-ensurer.reset-size10.size2, .katex .sizing.reset-size10.size2{font-size:.2892960463em}
+.katex .fontsize-ensurer.reset-size10.size3, .katex .sizing.reset-size10.size3{font-size:.337512054em}
+.katex .fontsize-ensurer.reset-size10.size4, .katex .sizing.reset-size10.size4{font-size:.3857280617em}
+.katex .fontsize-ensurer.reset-size10.size5, .katex .sizing.reset-size10.size5{font-size:.4339440694em}
+.katex .fontsize-ensurer.reset-size10.size6, .katex .sizing.reset-size10.size6{font-size:.4821600771em}
+.katex .fontsize-ensurer.reset-size10.size7, .katex .sizing.reset-size10.size7{font-size:.5785920926em}
+.katex .fontsize-ensurer.reset-size10.size8, .katex .sizing.reset-size10.size8{font-size:.6943105111em}
+.katex .fontsize-ensurer.reset-size10.size9, .katex .sizing.reset-size10.size9{font-size:.8331726133em}
+.katex .fontsize-ensurer.reset-size10.size10, .katex .sizing.reset-size10.size10{font-size:1em}
+.katex .fontsize-ensurer.reset-size10.size11, .katex .sizing.reset-size10.size11{font-size:1.1996142719em}
+.katex .fontsize-ensurer.reset-size11.size1, .katex .sizing.reset-size11.size1{font-size:.2009646302em}
+.katex .fontsize-ensurer.reset-size11.size2, .katex .sizing.reset-size11.size2{font-size:.2411575563em}
+.katex .fontsize-ensurer.reset-size11.size3, .katex .sizing.reset-size11.size3{font-size:.2813504823em}
+.katex .fontsize-ensurer.reset-size11.size4, .katex .sizing.reset-size11.size4{font-size:.3215434084em}
+.katex .fontsize-ensurer.reset-size11.size5, .katex .sizing.reset-size11.size5{font-size:.3617363344em}
+.katex .fontsize-ensurer.reset-size11.size6, .katex .sizing.reset-size11.size6{font-size:.4019292605em}
+.katex .fontsize-ensurer.reset-size11.size7, .katex .sizing.reset-size11.size7{font-size:.4823151125em}
+.katex .fontsize-ensurer.reset-size11.size8, .katex .sizing.reset-size11.size8{font-size:.578778135em}
+.katex .fontsize-ensurer.reset-size11.size9, .katex .sizing.reset-size11.size9{font-size:.6945337621em}
+.katex .fontsize-ensurer.reset-size11.size10, .katex .sizing.reset-size11.size10{font-size:.8336012862em}
+.katex .fontsize-ensurer.reset-size11.size11, .katex .sizing.reset-size11.size11{font-size:1em}
+.katex .delimsizing.size1{font-family:KaTeX_Size1}
+.katex .delimsizing.size2{font-family:KaTeX_Size2}
+.katex .delimsizing.size3{font-family:KaTeX_Size3}
+.katex .delimsizing.size4{font-family:KaTeX_Size4}
+.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}
+.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}
+.katex .nulldelimiter{display:inline-block;width:.12em}
+.katex .delimcenter, .katex .op-symbol{position:relative}
+.katex .op-symbol.small-op{font-family:KaTeX_Size1}
+.katex .op-symbol.large-op{font-family:KaTeX_Size2}
+.katex .accent>.vlist-t, .katex .op-limits>.vlist-t{text-align:center}
+.katex .accent .accent-body{position:relative}
+.katex .accent .accent-body:not(.accent-full){width:0}
+.katex .overlay{display:block}
+.katex .mtable .vertical-separator{display:inline-block;min-width:1px}
+.katex .mtable .arraycolsep{display:inline-block}
+.katex .mtable .col-align-c>.vlist-t{text-align:center}
+.katex .mtable .col-align-l>.vlist-t{text-align:left}
+.katex .mtable .col-align-r>.vlist-t{text-align:right}
+.katex .svg-align{text-align:left}
+.katex svg{fill:currentColor;stroke:currentColor;display:block;height:inherit;position:absolute;width:100%}
+.katex svg path{stroke:none}
+.katex svg{fill-rule:nonzero;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1}
+.katex img{border-style:none;max-height:none;max-width:none;min-height:0;min-width:0}
+.katex .stretchy{display:block;overflow:hidden;position:relative;width:100%}
+.katex .stretchy:after, .katex .stretchy:before{content:""}
+.katex .hide-tail{overflow:hidden;position:relative;width:100%}
+.katex .halfarrow-left{left:0;overflow:hidden;position:absolute;width:50.2%}
+.katex .halfarrow-right{overflow:hidden;position:absolute;right:0;width:50.2%}
+.katex .brace-left{left:0;overflow:hidden;position:absolute;width:25.1%}
+.katex .brace-center{left:25%;overflow:hidden;position:absolute;width:50%}
+.katex .brace-right{overflow:hidden;position:absolute;right:0;width:25.1%}
+.katex .x-arrow-pad{padding:0 .5em}
+.katex .cd-arrow-pad{padding:0 .55556em 0 .27778em}
+.katex .mover, .katex .munder, .katex .x-arrow{text-align:center}
+.katex .boxpad{padding:0 .3em}
+.katex .fbox, .katex .fcolorbox{border:.04em solid;box-sizing:border-box}
+.katex .cancel-pad{padding:0 .2em}
+.katex .cancel-lap{margin-left:-.2em;margin-right:-.2em}
+.katex .sout{border-bottom-style:solid;border-bottom-width:.08em}
+.katex .angl{border-right:.049em solid;border-top:.049em solid;box-sizing:border-box;margin-right:.03889em}
+.katex .anglpad{padding:0 .03889em}
+.katex .eqn-num:before{content:"(" counter(katexEqnNo) ")";counter-increment:katexEqnNo}
+.katex .mml-eqn-num:before{content:"(" counter(mmlEqnNo) ")";counter-increment:mmlEqnNo}
+.katex .mtr-glue{width:50%}
+.katex .cd-vert-arrow{display:inline-block;position:relative}
+.katex .cd-label-left{display:inline-block;position:absolute;right:calc(50% + .3em);text-align:left}
+.katex .cd-label-right{display:inline-block;left:calc(50% + .3em);position:absolute;text-align:right}
+.katex-display{display:block;margin:1em 0;text-align:center}
+.katex-display>.katex{display:block;text-align:center;white-space:nowrap}
+.katex-display>.katex>.katex-html{display:block;position:relative}
+.katex-display>.katex>.katex-html>.tag{position:absolute;right:0}
+.katex-display.leqno>.katex>.katex-html>.tag{left:0;right:auto}
+.katex-display.fleqn>.katex{padding-left:2em;text-align:left}
+.post-body{counter-reset:katexEqnNo mmlEqnNo}
+.katex{font-size:1.06em}
+.eq .katex-display{margin:.6em 0}
+.eq .katex-display .mtable .arraycolsep{width:1.2em}
+.katex{white-space:nowrap}
+:host{ color-scheme: light; --bg:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --ink3:#8a8984; --line:#e6e4dd;
+          --pos:#2a78d6; --neg:#eb6834; --neu:#9c9a92; --card:#f4f3ef; --shade: rgba(120,118,110,.13);
+          --s3:#1baf7a; --s7:#6250d6; --tipbg:#0b0b0b; --tipfg:#f0efec; }
+@media (prefers-color-scheme: dark) {:host(:not([data-theme="light"])){ color-scheme: dark; --bg:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8d8c85; --line:#33322f; --pos:#3987e5; --neg:#d95926; --neu:#7b7a73; --card:#242422; --shade: rgba(200,198,190,.10); --s3:#199e70; --s7:#9085e9; --tipbg:#f0efec; --tipfg:#1a1a19; }}
+:host([data-theme="dark"]){ color-scheme: dark; --bg:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8d8c85; --line:#33322f; --pos:#3987e5; --neg:#d95926; --neu:#7b7a73; --card:#242422; --shade: rgba(200,198,190,.10); --s3:#199e70; --s7:#9085e9; --tipbg:#f0efec; --tipfg:#1a1a19; }
+.post-body{ margin:0; background:var(--bg); color:var(--ink); font: 17px/1.65 Georgia, "Times New Roman", serif; }
+main{ max-width: 720px; margin: 0 auto; padding-block: 48px 80px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1{ font-size: 2.05rem; line-height:1.15; margin: 0 0 8px; font-weight: 600; text-wrap: balance; }
+.sub{ color: var(--ink2); font-size: 1.1rem; margin: 0 0 22px; }
+.meta{ font: 13px system-ui, sans-serif; color: var(--ink3); margin: 0 0 28px; }
+h2{ font-size: 1.32rem; margin: 44px 0 10px; font-weight: 600; text-wrap: balance; }
+h3{ font-size: 1.05rem; margin: 26px 0 8px; font-weight: 600; }
+p, ul, ol{ margin: 0 0 18px; }
+li{ margin: 0 0 6px; }
+code{ font: 15px ui-monospace, Menlo, Consolas, monospace; }
+.eq{ text-align:center; margin: 0 0 18px; overflow-x: auto; }
+.eq code{ white-space: nowrap; }
+figure{ margin: 26px 0 30px; padding: 16px 16px 10px; background: var(--card); border-radius: 12px; }
+figcaption{ font: 14px/1.5 system-ui, sans-serif; color: var(--ink2); margin-top: 8px; }
+figure svg{ width: 100%; height: auto; display: block; font: 13px system-ui, sans-serif; }
+figure svg + svg{ margin-top: 10px; }
+.bias{ display:inline-block; font: 11px/1.4 system-ui, sans-serif; letter-spacing: .03em; color: var(--ink3); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; margin-right: 4px; vertical-align: 1px; }
+.aside{ border-left: 3px solid var(--line); padding: 2px 0 2px 16px; color: var(--ink2); margin: 0 0 18px; }
+.gate{ font: 15px/1.5 system-ui, sans-serif; border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; margin: 0 0 22px; }
+.gate b{ font-weight: 600; }
+.twrap{ overflow-x: auto; margin: 0 0 22px; }
+.tbl{ border-collapse: collapse; font: 14px system-ui, sans-serif; width: 100%; min-width: 560px; }
+.tbl td, .tbl th{ padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: left; }
+.tbl th{ color: var(--ink2); font-weight: 500; }
+.tbl td.num, .tbl th.num{ text-align: right; font-variant-numeric: tabular-nums; }
+.tbl tr.hl td{ font-weight: 600; }
+.legend{ font: 13px system-ui, sans-serif; color: var(--ink2); margin: 0 0 6px; }
+.sw{ display:inline-block; width:10px; height:10px; border-radius:2px; vertical-align:middle; margin: 0 4px 0 10px; }
+.sw:first-child{ margin-left: 0; }
+.tip{ position: fixed; z-index: 20; pointer-events: none; background: var(--tipbg); color: var(--tipfg); font: 12.5px/1.45 system-ui, sans-serif; padding: 7px 9px; border-radius: 6px; max-width: 280px; }
+.tip .tv{ font-variant-numeric: tabular-nums; font-weight: 600; }
+.tip .tmuted{ opacity: .75; }
+.tsw{ display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:5px; vertical-align: 0; }
+small.note{ display:block; color: var(--ink3); font: 13px/1.5 system-ui, sans-serif; margin-top: 40px; }</style>
+<div class="post-body">
+<title>What free equity data actually looks like</title>
+<style>
+  :root { color-scheme: light; --bg:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --ink3:#8a8984; --line:#e6e4dd;
+          --pos:#2a78d6; --neg:#eb6834; --neu:#9c9a92; --card:#f4f3ef; --shade: rgba(120,118,110,.13);
+          --s3:#1baf7a; --s7:#6250d6; --tipbg:#0b0b0b; --tipfg:#f0efec; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { color-scheme: dark; --bg:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8d8c85; --line:#33322f; --pos:#3987e5; --neg:#d95926; --neu:#7b7a73; --card:#242422; --shade: rgba(200,198,190,.10); --s3:#199e70; --s7:#9085e9; --tipbg:#f0efec; --tipfg:#1a1a19; } }
+  :root[data-theme="dark"] { color-scheme: dark; --bg:#1a1a19; --ink:#f0efec; --ink2:#c3c2b7; --ink3:#8d8c85; --line:#33322f; --pos:#3987e5; --neg:#d95926; --neu:#7b7a73; --card:#242422; --shade: rgba(200,198,190,.10); --s3:#199e70; --s7:#9085e9; --tipbg:#f0efec; --tipfg:#1a1a19; }
+  body { margin:0; background:var(--bg); color:var(--ink); font: 17px/1.65 Georgia, "Times New Roman", serif; }
+  main { max-width: 720px; margin: 0 auto; padding-block: 48px 80px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  h1 { font-size: 2.05rem; line-height:1.15; margin: 0 0 8px; font-weight: 600; text-wrap: balance; }
+  .sub { color: var(--ink2); font-size: 1.1rem; margin: 0 0 22px; }
+  .meta { font: 13px system-ui, sans-serif; color: var(--ink3); margin: 0 0 28px; }
+  h2 { font-size: 1.32rem; margin: 44px 0 10px; font-weight: 600; text-wrap: balance; }
+  h3 { font-size: 1.05rem; margin: 26px 0 8px; font-weight: 600; }
+  p, ul, ol { margin: 0 0 18px; } li { margin: 0 0 6px; }
+  code { font: 15px ui-monospace, Menlo, Consolas, monospace; }
+  .eq { text-align:center; margin: 0 0 18px; overflow-x: auto; }
+  .eq code { white-space: nowrap; }
+  figure { margin: 26px 0 30px; padding: 16px 16px 10px; background: var(--card); border-radius: 12px; }
+  figcaption { font: 14px/1.5 system-ui, sans-serif; color: var(--ink2); margin-top: 8px; }
+  figure svg { width: 100%; height: auto; display: block; font: 13px system-ui, sans-serif; }
+  figure svg + svg { margin-top: 10px; }
+  .bias { display:inline-block; font: 11px/1.4 system-ui, sans-serif; letter-spacing: .03em; color: var(--ink3); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; margin-right: 4px; vertical-align: 1px; }
+  .aside { border-left: 3px solid var(--line); padding: 2px 0 2px 16px; color: var(--ink2); margin: 0 0 18px; }
+  .gate { font: 15px/1.5 system-ui, sans-serif; border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; margin: 0 0 22px; }
+  .gate b { font-weight: 600; }
+  .twrap { overflow-x: auto; margin: 0 0 22px; }
+  .tbl { border-collapse: collapse; font: 14px system-ui, sans-serif; width: 100%; min-width: 560px; }
+  .tbl td, .tbl th { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: left; }
+  .tbl th { color: var(--ink2); font-weight: 500; }
+  .tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tbl tr.hl td { font-weight: 600; }
+  .legend { font: 13px system-ui, sans-serif; color: var(--ink2); margin: 0 0 6px; }
+  .sw { display:inline-block; width:10px; height:10px; border-radius:2px; vertical-align:middle; margin: 0 4px 0 10px; }
+  .sw:first-child { margin-left: 0; }
+  .tip { position: fixed; z-index: 20; pointer-events: none; background: var(--tipbg); color: var(--tipfg); font: 12.5px/1.45 system-ui, sans-serif; padding: 7px 9px; border-radius: 6px; max-width: 280px; }
+  .tip .tv { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .tip .tmuted { opacity: .75; }
+  .tsw { display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:5px; vertical-align: 0; }
+  small.note { display:block; color: var(--ink3); font: 13px/1.5 system-ui, sans-serif; margin-top: 40px; }
+</style>
+
+<main>
+<p class="meta">Stat-arb notes</p>
+<h1>What free equity data actually looks like</h1>
+<p class="sub">Yahoo prices, SEC filings, a few exchange files and a second source on a free quota. Most of the work was learning which numbers to distrust.</p>
+
+<p class="aside">All numbers here are from free data that holds only companies listed today. That makes the data survivorship-biased. For a reversal strategy the bias most likely flatters the results, because the stocks that fell and never came back are missing, but the direction isn't proven. This post is about the data, not the strategy.</p>
+
+<p>Before I could test a single signal, I needed daily prices, corporate actions, a security list and market caps for US common stocks. Paid sources solve most of this. I used free ones: Yahoo for prices, splits and dividends; the SEC's company list and shares-outstanding filings; the Nasdaq Trader symbol files; and the Kenneth French data library for a market benchmark. The result covers 4,186 securities and 16.5 million security-days from 2000 to 2026. Getting there took longer than the first model.</p>
+
+<h2>Yahoo's "Close" is not a raw price</h2>
+<p>Yahoo's close, volume and dividends are split-adjusted. A stock that split 2-for-1 last year shows half its old price for every day before the split. That's fine for charts but wrong for anything that needs the price a trader actually saw, such as a dollar-volume filter or a $5 price floor. So I rebuilt raw prices from Yahoo's own split history, logged every reconstruction, and checked the result against known raw prints.</p>
+<p>Then I computed total return myself from the raw close, the split factor and the cash dividend, and compared it with Yahoo's. They disagreed by more than 1 bp on 41,191 security-days. That looked like a large error. It wasn't.</p>
+
+<h2>The dividend convention trap</h2>
+<p>There are two common ways to fold a dividend into a daily return. With <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>P</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">P_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> the close, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>D</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">D_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> the cash dividend and a split factor <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mi>t</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">s_t = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> on days with no split:</p>
+<div class="eq" style="overflow-x:auto"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left right left" columnspacing="0em 1em 0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msubsup><mi>r</mi><mi>t</mi><mtext>add</mtext></msubsup></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mrow><msub><mi>s</mi><mi>t</mi></msub><msub><mi>P</mi><mi>t</mi></msub><mo>+</mo><msub><mi>D</mi><mi>t</mi></msub></mrow><msub><mi>P</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub></mfrac><mo>−</mo><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mtext>dividend added to the price</mtext></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msubsup><mi>r</mi><mi>t</mi><mtext>Yahoo</mtext></msubsup></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mrow><msub><mi>s</mi><mi>t</mi></msub><msub><mi>P</mi><mi>t</mi></msub></mrow><mrow><msub><mi>P</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>D</mi><mi>t</mi></msub></mrow></mfrac><mo>−</mo><mn>1</mn></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mtext>dividend taken off the prior close</mtext></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+r^{\text{add}}_t &amp;= \frac{s_t P_t + D_t}{P_{t-1}} - 1 &amp;&amp;\text{dividend added to the price}\\[4pt]
+r^{\text{Yahoo}}_t &amp;= \frac{s_t P_t}{P_{t-1} - D_t} - 1 &amp;&amp;\text{dividend taken off the prior close}
+\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.8093em;vertical-align:-2.1547em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.6547em;"><span style="top:-4.6547em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-2.453em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">add</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.1em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-2.453em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">Yahoo</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.1547em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.6547em;"><span style="top:-4.6547em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8943em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span><span style="top:-2.1em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8943em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.1547em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.6547em;"><span style="top:-4.6547em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"></span></span><span style="top:-2.1em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.1547em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.6547em;"><span style="top:-4.6547em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"><span class="mord"></span><span class="mord text"><span class="mord">dividend added to the price</span></span></span></span><span style="top:-2.1em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"><span class="mord"></span><span class="mord text"><span class="mord">dividend taken off the prior close</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.1547em;"><span></span></span></span></span></span></span></span></span></span></span></span></div>
+<p>Both are reasonable. They aren't the same. Dividing one by the other gives the gap directly, with <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>t</mi></msub><mo>=</mo><msub><mi>D</mi><mi>t</mi></msub><mi mathvariant="normal">/</mi><msub><mi>P</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">y_t = D_t / P_{t-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span></span></span></span> the dividend yield:</p>
+<div class="eq" style="overflow-x:auto"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msubsup><mi>r</mi><mi>t</mi><mtext>Yahoo</mtext></msubsup></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msubsup><mi>r</mi><mi>t</mi><mtext>add</mtext></msubsup><mo>⋅</mo><mfrac><msub><mi>P</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mrow><msub><mi>P</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>D</mi><mi>t</mi></msub></mrow></mfrac></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><msubsup><mi>r</mi><mi>t</mi><mtext>Yahoo</mtext></msubsup><mo>−</mo><msubsup><mi>r</mi><mi>t</mi><mtext>add</mtext></msubsup></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><msubsup><mi>r</mi><mi>t</mi><mtext>add</mtext></msubsup><mo>⋅</mo><mfrac><msub><mi>D</mi><mi>t</mi></msub><mrow><msub><mi>P</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>−</mo><msub><mi>D</mi><mi>t</mi></msub></mrow></mfrac><mtext>  </mtext><mo>≈</mo><mtext>  </mtext><msubsup><mi>r</mi><mi>t</mi><mtext>add</mtext></msubsup><mtext> </mtext><msub><mi>y</mi><mi>t</mi></msub></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+r^{\text{Yahoo}}_t &amp;= r^{\text{add}}_t \cdot \frac{P_{t-1}}{P_{t-1} - D_t}\\[4pt]
+r^{\text{Yahoo}}_t - r^{\text{add}}_t &amp;= r^{\text{add}}_t \cdot \frac{D_t}{P_{t-1} - D_t} \;\approx\; r^{\text{add}}_t\, y_t
+\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.8093em;vertical-align:-2.1547em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.6547em;"><span style="top:-4.6547em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-2.453em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">Yahoo</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.1em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-2.453em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">Yahoo</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-2.453em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">add</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.1547em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.6547em;"><span style="top:-4.6547em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-2.453em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">add</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8943em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-2.1em;"><span class="pstrut" style="height:3.3603em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-2.453em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">add</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2083em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8943em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8991em;"><span style="top:-2.453em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">add</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2806em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.1547em;"><span></span></span></span></span></span></span></span></span></span></span></span></div>
+<p>So the two only differ on ex-dividend days, and by roughly the day's return times the yield. A 2% move on a day with a 1% dividend gives a 2 bp gap. After restating my returns in Yahoo's convention, only 130 of 16.5 million security-days still differ by more than 1 bp, and none of them falls on a day without a split or dividend. Those 130 are real disagreements about a corporate action. Another 61 differ on purpose, because the second-source check below changed them.</p>
+<p>The lesson is that a total-return check is only as good as its dividend convention. If I had "fixed" the 41,191 days, I would have broken data that was correct.</p>
+
+<h2>How dirty the rest is</h2>
+<p>Once the convention was right, the real problems were easier to see.</p>
+<ul>
+<li><b>Extreme moves.</b> 7,627 daily returns are larger than 50% in absolute value. Only 770 of them fall inside the tradable universe, after the liquidity filter. A second source confirmed 669 of those as real. Nine have a price ratio close to an integer, which usually means a split the vendor missed.</li>
+<li><b>Bad ticks.</b> 2,274 days look like a spike that fully reverses the next day. 37 are in the universe. For a reversal strategy these are poison: a fake spike and its fake reversal look exactly like the signal.</li>
+<li><b>Dividends.</b> 117 cash dividends are more than 25% of the prior close. Some are real special dividends, some are spin-offs recorded as cash, and some are errors.</li>
+<li><b>Share counts.</b> SEC filings of shares outstanding jump by more than 10 times against the previous filing, net of splits, 776 times across 451 securities. A robust median rule ignores 416 of them. One security still reaches a market cap above $10 trillion.</li>
+</ul>
+<figure>
+<div class="legend"><span class="sw" style="background:var(--neu)"></span>all securities <span class="sw" style="background:var(--pos)"></span>tradable universe</div>
+<svg viewBox="0 0 680 142" role="img" aria-label="security-days (log scale)">
+<line x1="190.0" x2="190.0" y1="14" y2="118" style="stroke:var(--line)"/>
+<text x="190.0" y="134.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">1</text>
+<line x1="295.0" x2="295.0" y1="14" y2="118" style="stroke:var(--line)"/>
+<text x="295.0" y="134.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">10</text>
+<line x1="400.0" x2="400.0" y1="14" y2="118" style="stroke:var(--line)"/>
+<text x="400.0" y="134.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">100</text>
+<line x1="505.0" x2="505.0" y1="14" y2="118" style="stroke:var(--line)"/>
+<text x="505.0" y="134.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">1,000</text>
+<line x1="610.0" x2="610.0" y1="14" y2="118" style="stroke:var(--line)"/>
+<text x="610.0" y="134.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">10,000</text>
+<text x="180.0" y="35.0" dy="0.32em" text-anchor="end" font-size="12.5" style="fill:var(--ink)">Daily moves over 50%</text>
+<rect x="190" y="20" width="407.6" height="12" rx="3" style="fill:var(--neu)"/>
+<text x="603.6" y="26.0" dy="0.32em" text-anchor="start" font-size="11.5" style="fill:var(--ink2)">7,627</text>
+<rect x="190" y="34" width="303.1" height="12" rx="3" style="fill:var(--pos)"/>
+<text x="499.1" y="40.0" dy="0.32em" text-anchor="start" font-size="11.5" style="fill:var(--ink2)">770</text>
+<text x="180.0" y="77.0" dy="0.32em" text-anchor="end" font-size="12.5" style="fill:var(--ink)">Bad ticks (spike and reverse)</text>
+<rect x="190" y="62" width="352.5" height="12" rx="3" style="fill:var(--neu)"/>
+<text x="548.5" y="68.0" dy="0.32em" text-anchor="start" font-size="11.5" style="fill:var(--ink2)">2,274</text>
+<rect x="190" y="76" width="164.7" height="12" rx="3" style="fill:var(--pos)"/>
+<text x="360.7" y="82.0" dy="0.32em" text-anchor="start" font-size="11.5" style="fill:var(--ink2)">37</text>
+<text x="190.0" y="12.0" dy="0" text-anchor="start" font-size="11" style="fill:var(--ink3)">security-days (log scale)</text>
+</svg>
+<figcaption><span class="bias">free data</span>Figure 1. Data problems in the whole dataset and inside the tradable universe, log scale. The liquidity filter removes most of them, but not all.</figcaption>
+</figure>
+<p>Most of the damage sits in small, illiquid names that the universe filter already drops. That's reassuring, but the remainder is exactly where a reversal strategy would trade.</p>
+
+<h2>A second source on a free quota</h2>
+<p>For the flagged cases I used Tiingo's free tier as a second source. It allows about 490 symbols a month at 50 requests an hour, so I ranked targets by how much they could hurt: suspected missing splits first, then bad ticks and implausible dividends, then other large moves inside the universe. All 589 flagged securities took two monthly quotas.</p>
+<figure>
+<svg viewBox="0 0 680 174" role="img" aria-label="outcomes of the second-source check">
+<text x="180.0" y="28.0" dy="0.32em" text-anchor="end" font-size="12.5" style="fill:var(--ink)">Big move confirmed</text>
+<rect x="190" y="20" width="396.7" height="12" rx="3" style="fill:var(--pos)"/>
+<text x="592.7" y="26.0" dy="0.32em" text-anchor="start" font-size="11.5" style="fill:var(--ink2)">2,078</text>
+<text x="180.0" y="56.0" dy="0.32em" text-anchor="end" font-size="12.5" style="fill:var(--ink)">No coverage</text>
+<rect x="190" y="48" width="76.4" height="12" rx="3" style="fill:var(--pos)"/>
+<text x="272.4" y="54.0" dy="0.32em" text-anchor="start" font-size="11.5" style="fill:var(--ink2)">400</text>
+<text x="180.0" y="84.0" dy="0.32em" text-anchor="end" font-size="12.5" style="fill:var(--ink)">Price scale mismatch</text>
+<rect x="190" y="76" width="21.6" height="12" rx="3" style="fill:var(--pos)"/>
+<text x="217.6" y="82.0" dy="0.32em" text-anchor="start" font-size="11.5" style="fill:var(--ink2)">113</text>
+<text x="180.0" y="112.0" dy="0.32em" text-anchor="end" font-size="12.5" style="fill:var(--ink)">Missing split added</text>
+<rect x="190" y="104" width="5.2" height="12" rx="3" style="fill:var(--pos)"/>
+<text x="201.2" y="110.0" dy="0.32em" text-anchor="start" font-size="11.5" style="fill:var(--ink2)">27</text>
+<text x="180.0" y="140.0" dy="0.32em" text-anchor="end" font-size="12.5" style="fill:var(--ink)">Close replaced</text>
+<rect x="190" y="132" width="3.8" height="12" rx="3" style="fill:var(--pos)"/>
+<text x="199.8" y="138.0" dy="0.32em" text-anchor="start" font-size="11.5" style="fill:var(--ink2)">20</text>
+<text x="190.0" y="12.0" dy="0" text-anchor="start" font-size="11" style="fill:var(--ink3)">outcomes of the second-source check</text>
+</svg>
+<figcaption><span class="bias">free data</span>Figure 2. Outcomes of the second-source check on 589 flagged securities. Confirmed moves stay as they are and are exempt from automatic removal.</figcaption>
+</figure>
+<p>The check confirmed 2,078 large moves, added 27 missing splits and replaced 20 closes. It also had no coverage for 400 cases and a different price scale for 113, and those stay unresolved.</p>
+
+<h2>Mask what's left, but only backward in time</h2>
+<p>After all of that, 268 in-universe security-days (0.003%) were still unresolved. I stopped looking for a third free source and masked them instead. A security leaves the universe on the issue day and the next five trading days:</p>
+<div class="eq" style="overflow-x:auto"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msub><mtext>issue</mtext><mrow><mi>i</mi><mo separator="true">,</mo><mi>t</mi></mrow></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>∈</mo><mo stretchy="false">{</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">}</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><msub><mtext>masked</mtext><mrow><mi>i</mi><mo separator="true">,</mo><mi>t</mi></mrow></msub></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><munder><mrow><mi>max</mi><mo>⁡</mo></mrow><mrow><mn>0</mn><mo>≤</mo><mi>k</mi><mo>≤</mo><mn>5</mn></mrow></munder><msub><mtext>issue</mtext><mrow><mi>i</mi><mo separator="true">,</mo><mtext> </mtext><mi>t</mi><mo>−</mo><mi>k</mi></mrow></msub></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+\text{issue}_{i,t} &amp;\in \{0,1\}\\[2pt]
+\text{masked}_{i,t} &amp;= \max_{0 \le k \le 5} \text{issue}_{i,\,t-k}
+\end{aligned}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.3873em;vertical-align:-1.4436em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.9436em;"><span style="top:-4.1036em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord text"><span class="mord">issue</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span><span style="top:-2.4036em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord text"><span class="mord">masked</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4436em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.9436em;"><span style="top:-4.1036em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mopen">{</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">}</span></span></span><span style="top:-2.4036em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.4306em;"><span style="top:-2.3479em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span><span class="mrel mtight">≤</span><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span><span class="mrel mtight">≤</span><span class="mord mtight">5</span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">max</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8473em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord text"><span class="mord">issue</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mpunct mtight">,</span><span class="mspace mtight" style="margin-right:0.1952em;"></span><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4436em;"><span></span></span></span></span></span></span></span></span></span></span></span></div>
+<p>The rule never removes a security on the day before an issue. Knowing that an issue is coming tomorrow is itself information about the future, and a backtest that drops a stock the day before its bad print has looked ahead.</p>
+
+<h2>Two sanity checks</h2>
+<p>There is no free source of historical market-cap levels to check against. What I could check is co-movement. The cap-weighted universe tracks the French market return with a correlation of 0.984 and a tracking error of 3.2% a year over 4,370 days. By year it is above 0.98 from 2010 on. The low 2009 value is a partial year, because SEC filings of shares outstanding only start then, so market cap doesn't exist before it.</p>
+<figure>
+<svg viewBox="0 0 680 230" role="img" aria-label="daily correlation with the market">
+<line x1="56" x2="584" y1="196.0" y2="196.0" style="stroke:var(--line)" stroke-width="1"/>
+<text x="50.0" y="196.0" dy="0.32em" text-anchor="end" font-size="11" style="fill:var(--ink3)">0.85</text>
+<line x1="56" x2="584" y1="141.3" y2="141.3" style="stroke:var(--line)" stroke-width="1"/>
+<text x="50.0" y="141.3" dy="0.32em" text-anchor="end" font-size="11" style="fill:var(--ink3)">0.90</text>
+<line x1="56" x2="584" y1="86.7" y2="86.7" style="stroke:var(--line)" stroke-width="1"/>
+<text x="50.0" y="86.7" dy="0.32em" text-anchor="end" font-size="11" style="fill:var(--ink3)">0.95</text>
+<line x1="56" x2="584" y1="32.0" y2="32.0" style="stroke:var(--line)" stroke-width="1"/>
+<text x="50.0" y="32.0" dy="0.32em" text-anchor="end" font-size="11" style="fill:var(--ink3)">1.00</text>
+<text x="8.0" y="26.0" dy="0" text-anchor="start" font-size="11" style="fill:var(--ink3)">daily correlation with the market</text>
+<text x="56.0" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2009</text>
+<text x="149.2" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2012</text>
+<text x="242.4" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2015</text>
+<text x="335.5" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2018</text>
+<text x="428.7" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2021</text>
+<text x="521.9" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2024</text>
+<text x="584.0" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2026</text>
+<polyline points="56.0,180.0 87.1,36.0 118.1,47.8 149.2,34.7 180.2,34.6 211.3,35.3 242.4,33.9 273.4,34.1 304.5,36.0 335.5,34.0 366.6,34.8 397.6,32.8 428.7,37.8 459.8,34.1 490.8,36.3 521.9,39.1 552.9,38.6 584.0,50.3" fill="none" style="stroke:var(--pos)" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="56.0" cy="180.0" r="3" style="fill:var(--pos)"/>
+<circle cx="87.1" cy="36.0" r="3" style="fill:var(--pos)"/>
+<circle cx="118.1" cy="47.8" r="3" style="fill:var(--pos)"/>
+<circle cx="149.2" cy="34.7" r="3" style="fill:var(--pos)"/>
+<circle cx="180.2" cy="34.6" r="3" style="fill:var(--pos)"/>
+<circle cx="211.3" cy="35.3" r="3" style="fill:var(--pos)"/>
+<circle cx="242.4" cy="33.9" r="3" style="fill:var(--pos)"/>
+<circle cx="273.4" cy="34.1" r="3" style="fill:var(--pos)"/>
+<circle cx="304.5" cy="36.0" r="3" style="fill:var(--pos)"/>
+<circle cx="335.5" cy="34.0" r="3" style="fill:var(--pos)"/>
+<circle cx="366.6" cy="34.8" r="3" style="fill:var(--pos)"/>
+<circle cx="397.6" cy="32.8" r="3" style="fill:var(--pos)"/>
+<circle cx="428.7" cy="37.8" r="3" style="fill:var(--pos)"/>
+<circle cx="459.8" cy="34.1" r="3" style="fill:var(--pos)"/>
+<circle cx="490.8" cy="36.3" r="3" style="fill:var(--pos)"/>
+<circle cx="521.9" cy="39.1" r="3" style="fill:var(--pos)"/>
+<circle cx="552.9" cy="38.6" r="3" style="fill:var(--pos)"/>
+<circle cx="584.0" cy="50.3" r="3" style="fill:var(--pos)"/>
+<circle cx="56.0" cy="180.0" r="3.5" style="fill:none;stroke:var(--ink2)" stroke-width="1.2"/>
+<text x="64.0" y="184.0" dy="0" text-anchor="start" font-size="11.5" style="fill:var(--ink2)">2009: partial year, 180 days</text>
+</svg>
+<figcaption><span class="bias">free data</span>Figure 3. Daily correlation of the cap-weighted universe return with the French market return, by year. Above 0.98 every year from 2010.</figcaption>
+</figure>
+<p>The second check shows the bias instead of hiding it. The tradable universe grows from about 660 stocks in 2001 to about 2,570 in 2026. Part of that is real listing growth. Most of it is that free data only holds today's companies, so the early years contain only the stocks that survived 25 years.</p>
+<figure>
+<svg viewBox="0 0 680 230" role="img" aria-label="securities in the tradable universe">
+<line x1="56" x2="584" y1="196.0" y2="196.0" style="stroke:var(--line)" stroke-width="1"/>
+<text x="50.0" y="196.0" dy="0.32em" text-anchor="end" font-size="11" style="fill:var(--ink3)">0</text>
+<line x1="56" x2="584" y1="168.7" y2="168.7" style="stroke:var(--line)" stroke-width="1"/>
+<text x="50.0" y="168.7" dy="0.32em" text-anchor="end" font-size="11" style="fill:var(--ink3)">500</text>
+<line x1="56" x2="584" y1="141.3" y2="141.3" style="stroke:var(--line)" stroke-width="1"/>
+<text x="50.0" y="141.3" dy="0.32em" text-anchor="end" font-size="11" style="fill:var(--ink3)">1,000</text>
+<line x1="56" x2="584" y1="114.0" y2="114.0" style="stroke:var(--line)" stroke-width="1"/>
+<text x="50.0" y="114.0" dy="0.32em" text-anchor="end" font-size="11" style="fill:var(--ink3)">1,500</text>
+<line x1="56" x2="584" y1="86.7" y2="86.7" style="stroke:var(--line)" stroke-width="1"/>
+<text x="50.0" y="86.7" dy="0.32em" text-anchor="end" font-size="11" style="fill:var(--ink3)">2,000</text>
+<line x1="56" x2="584" y1="59.3" y2="59.3" style="stroke:var(--line)" stroke-width="1"/>
+<text x="50.0" y="59.3" dy="0.32em" text-anchor="end" font-size="11" style="fill:var(--ink3)">2,500</text>
+<line x1="56" x2="584" y1="32.0" y2="32.0" style="stroke:var(--line)" stroke-width="1"/>
+<text x="50.0" y="32.0" dy="0.32em" text-anchor="end" font-size="11" style="fill:var(--ink3)">3,000</text>
+<text x="8.0" y="26.0" dy="0" text-anchor="start" font-size="11" style="fill:var(--ink3)">securities in the tradable universe</text>
+<text x="56.0" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2001</text>
+<text x="161.6" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2006</text>
+<text x="267.2" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2011</text>
+<text x="372.8" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2016</text>
+<text x="478.4" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2021</text>
+<text x="584.0" y="214.0" dy="0" text-anchor="middle" font-size="11" style="fill:var(--ink3)">2026</text>
+<polygon points="56.0,157.1 77.1,155.7 98.2,150.6 119.4,145.4 140.5,142.5 161.6,136.9 182.7,131.0 203.8,133.1 225.0,137.1 246.1,132.4 267.2,130.6 288.3,129.3 309.4,120.2 330.6,116.1 351.7,113.2 372.8,107.5 393.9,103.8 415.0,99.8 436.2,95.5 457.3,83.0 478.4,68.5 499.5,70.4 520.6,76.7 541.8,67.6 562.9,59.6 584.0,51.3 584.0,60.1 562.9,74.9 541.8,80.0 520.6,85.2 499.5,84.4 478.4,82.7 457.3,101.2 436.2,102.6 415.0,104.5 393.9,109.6 372.8,116.0 351.7,117.4 330.6,120.6 309.4,129.9 288.3,133.7 267.2,133.9 246.1,137.5 225.0,146.7 203.8,143.4 182.7,137.2 161.6,142.5 140.5,145.9 119.4,150.8 98.2,159.4 77.1,160.1 56.0,161.8" style="fill:var(--pos);opacity:.18"/>
+<polyline points="56.0,159.8 77.1,157.7 98.2,155.4 119.4,148.5 140.5,144.5 161.6,139.5 182.7,134.3 203.8,135.8 225.0,140.0 246.1,135.3 267.2,132.3 288.3,131.8 309.4,126.0 330.6,118.9 351.7,115.1 372.8,113.2 393.9,107.4 415.0,102.4 436.2,99.9 457.3,93.9 478.4,73.2 499.5,79.0 520.6,81.3 541.8,75.0 562.9,67.2 584.0,55.5" fill="none" style="stroke:var(--pos)" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="56.0" cy="159.8" r="3.5" style="fill:none;stroke:var(--ink2)" stroke-width="1.2"/>
+<text x="64.0" y="145.8" dy="0" text-anchor="start" font-size="11.5" style="fill:var(--ink2)">about 660</text>
+<circle cx="584.0" cy="55.5" r="3.5" style="fill:none;stroke:var(--ink2)" stroke-width="1.2"/>
+<text x="576.0" y="41.5" dy="0" text-anchor="end" font-size="11.5" style="fill:var(--ink2)">about 2,570</text>
+</svg>
+<figcaption><span class="bias">free data</span>Figure 4. Size of the tradable universe by year: mean (line) and daily range (band). The early years are the survivors, which makes them the most biased part of the sample.</figcaption>
+</figure>
+
+<h2>Smaller traps</h2>
+<ul>
+<li>The Nasdaq Trader files use exchange codes that aren't in their documentation (Texas listings). I excluded them.</li>
+<li>Foreign private issuers look like ordinary stocks. The reliable tell is their latest annual report form (20-F or 40-F).</li>
+<li>"Registry shares," such as ASML's, behave like American depositary receipts and belong with them.</li>
+<li>SEC company facts drop the share-class dimension. Companies with several share classes only have a company total.</li>
+<li>Market cap simply doesn't exist before the first machine-readable filings around 2009. I didn't backfill it.</li>
+</ul>
+
+<h2>What I take from it</h2>
+<ol>
+<li><b>Check conventions before fixing data.</b> The largest discrepancy in the whole dataset was a definition, not an error.</li>
+<li><b>Warn, don't silently fix.</b> Every automatic correction is logged and counted, so I can say exactly what the cleaning changed.</li>
+<li><b>Spend the second source where it hurts most.</b> On a quota, ranking targets by damage mattered more than coverage.</li>
+<li><b>Masks must look backward only.</b> A cleaning rule can leak the future just as easily as a model can.</li>
+<li><b>Show the bias.</b> The universe-size chart says more about survivorship than any caveat in the text.</li>
+</ol>
+<small class="note">Data snapshot of 20 October 2026, cleaned and re-checked on 3 November 2026. Survivorship-biased free data; all figures describe the data, not a strategy.</small>
+</main>
+</div>
+{% endraw %}

@@ -1,6 +1,7 @@
 {%- comment -%}
   Show a post's self-contained HTML inline, in a shadow root (see tools/build_embeds.py).
-  Params: embed (e.g. /assets/posts/<slug>/), preview (true = show the opening only, fading
+  Params: embed (e.g. /assets/posts/<slug>/), body (slug: embed _includes/post-bodies/<slug>.html at build
+  time as a declarative shadow root, so the post is readable without JavaScript), preview (true = show the opening only, fading
   into a "Read the full post" button), url (post URL, for the button), cut (preview only: text a paragraph starts with; the fade begins at that paragraph).
   Block comments only in the script: Chirpy minifies pages onto one line.
 {%- endcomment -%}
@@ -17,18 +18,25 @@
 {%- comment -%} ?v= build time: Chirpy's service worker caches by URL, so each deploy gets fresh post files {%- endcomment -%}
 {%- assign v = site.time | date: '%s' -%}
 <link rel="stylesheet" href="{{ include.embed | relative_url }}fonts.css?v={{ v }}">
-<div class="post-host" data-src="{{ include.embed | relative_url }}content.html?v={{ v }}"{% if include.preview %} data-preview="1"{% endif %}{% if include.cut %} data-cut="{{ include.cut | escape }}"{% endif %} style="display:block"></div>
+<div class="post-host" data-src="{{ include.embed | relative_url }}content.html?v={{ v }}"{% if include.preview %} data-preview="1"{% endif %}{% if include.cut %} data-cut="{{ include.cut | escape }}"{% endif %} style="display:block">{% if include.body %}<template shadowrootmode="open">{% include post-bodies/{{ include.body }}.html %}</template>{% endif %}</div>
 {%- if include.preview %}
 <div class="post-fade"><a class="post-readmore" href="{{ include.url | relative_url }}">Read the full post <i class="fas fa-arrow-right fa-fw"></i></a></div>
-{%- else %}
+{%- elsif include.body == nil %}
 <noscript><p><a href="{{ include.embed | relative_url }}">Open the post</a></p></noscript>
 {%- endif %}
 <script>
 (function () {
   document.querySelectorAll('.post-host:not([data-loaded])').forEach(function (host) {
-  if (!host.attachShadow) { return; }
   host.setAttribute('data-loaded', '1');
-  var root = host.attachShadow({ mode: 'open' });
+  var root = host.shadowRoot, tpl = host.querySelector('template');
+  if (!root && tpl && host.attachShadow) {
+    /* browser without declarative shadow DOM: attach the build-time body by hand */
+    root = host.attachShadow({ mode: 'open' });
+    root.appendChild(tpl.content);
+    tpl.remove();
+  }
+  if (!root && !host.attachShadow) { return; }
+  if (!root) { root = host.attachShadow({ mode: 'open' }); }
   /* follow the site's mode: Chirpy 7 sets data-bs-theme on <html> (older versions data-mode); else the OS setting */
   function theme() {
     var de = document.documentElement;
@@ -44,8 +52,9 @@
     var mq = window.matchMedia('(prefers-color-scheme: dark)');
     if (mq.addEventListener) { mq.addEventListener('change', theme); }
   }
-  fetch(host.getAttribute('data-src')).then(function (r) { return r.text(); }).then(function (html) {
-    root.innerHTML = html;
+  var ready = root.childNodes.length ? Promise.resolve() :
+    fetch(host.getAttribute('data-src')).then(function (r) { return r.text(); }).then(function (html) { root.innerHTML = html; });
+  ready.then(function () {
     var wrap = root.querySelector('.post-body') || root;
     /* the post's scripts were written for a whole page: point their document lookups at the shadow root */
     var fake = new Proxy(document, {

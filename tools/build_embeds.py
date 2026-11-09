@@ -7,8 +7,11 @@ For every assets/posts/<slug>/index.html this writes, next to it:
                 shadow-DOM host and a .post-body wrapper), the <body> markup, and the
                 post's scripts as <script type="text/x-post"> (run later by the loader)
   fonts.css     the post's @font-face rules (fonts must be declared at document level)
+and _includes/post-bodies/<slug>.html, the same content wrapped in {% raw %} so the post
+page can embed it at build time (declarative shadow DOM: readable without JavaScript).
 
-The post page (_layouts/post-embed.html) fetches content.html into a shadow root, so the
+The post page (_layouts/post.html) embeds the body at build time; the featured preview
+fetches content.html. Either way the content sits in a shadow root, so the
 post keeps its own design, the site's styles don't leak in, and the page scrolls normally.
 Run after adding or editing a post:  python tools/build_embeds.py
 Needs: pip install tinycss2
@@ -65,6 +68,11 @@ def build(doc_path: Path):
     content = (f'<style>{scoped}</style>\n<div class="{wrap_cls}">{body}</div>\n'
                + ''.join(f'<script type="text/x-post">{js}</script>\n' for js in scripts))
     (doc_path.parent / 'content.html').write_text(content, encoding='utf-8')
+    if 'endraw' in content:
+        raise SystemExit(f'{doc_path}: contains "endraw", which would break the build-time include')
+    inc = ROOT / '_includes' / 'post-bodies' / f'{doc_path.parent.name}.html'
+    inc.parent.mkdir(exist_ok=True)
+    inc.write_text('{% raw %}' + content + '{% endraw %}', encoding='utf-8')
     (doc_path.parent / 'fonts.css').write_text('\n'.join(fonts) + '\n', encoding='utf-8')
     return len(scoped), len(fonts), len(scripts)
 
