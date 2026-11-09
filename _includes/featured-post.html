@@ -1,7 +1,43 @@
-{%- comment -%} Preview of each post with `featured: true`: its opening, fading into "Read the full post". {%- endcomment -%}
+{%- comment -%}
+  Featured posts (`featured: <n>` in a post's front matter; lower n comes first and is the default tab).
+  One preview box, with a tab per post when there is more than one. Optional `featured_label` sets the tab text.
+  Block comments only in the script: Chirpy minifies pages onto one line.
+{%- endcomment -%}
+<style>.featured-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 .75rem}
+.featured-tab{font:inherit;font-size:.9rem;font-weight:600;padding:.4rem 1rem;border-radius:999px;border:1px solid var(--main-border-color);background:transparent;color:var(--text-muted-color);cursor:pointer}
+.featured-tab:hover{color:var(--text-color)}
+.featured-tab[aria-selected="true"]{background:var(--link-color);border-color:var(--link-color);color:var(--main-bg)}
+.featured-panel[hidden]{display:none}</style>
+{%- assign featured = site.posts | where_exp: "p", "p.featured" | sort: "featured" -%}
 <div class="featured-wrap">
-{%- assign featured = site.posts | where: "featured", true -%}
+{%- if featured.size > 1 %}
+<div class="featured-tabs" role="tablist" aria-label="Featured posts">
 {%- for po in featured %}
-{% include post-inline.html embed=po.embed preview=true url=po.url cut=po.preview_cut %}
+<button type="button" class="featured-tab" role="tab" id="ftab-{{ forloop.index }}" aria-controls="fpanel-{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ po.featured_label | default: po.title }}</button>
 {%- endfor %}
 </div>
+{%- endif %}
+{%- for po in featured %}
+<div class="featured-panel" role="tabpanel" id="fpanel-{{ forloop.index }}" aria-labelledby="ftab-{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %}>
+{% include post-inline.html embed=po.embed preview=true url=po.url cut=po.preview_cut %}
+</div>
+{%- endfor %}
+</div>
+{%- if featured.size > 1 %}
+<script>
+(function () {
+  var tabs = document.querySelectorAll('.featured-tab');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (o) {
+        var on = o === t;
+        o.setAttribute('aria-selected', on ? 'true' : 'false');
+        document.getElementById(o.getAttribute('aria-controls')).hidden = !on;
+      });
+      /* a hidden preview can't measure its cut point: re-run the clip now that it is visible */
+      window.dispatchEvent(new Event('resize'));
+    });
+  });
+})();
+</script>
+{%- endif %}

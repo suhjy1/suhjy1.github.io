@@ -27,12 +27,21 @@
   if (!host.attachShadow) { return; }
   host.setAttribute('data-loaded', '1');
   var root = host.attachShadow({ mode: 'open' });
+  /* follow the site's mode: Chirpy 7 sets data-bs-theme on <html> (older versions data-mode); else the OS setting */
   function theme() {
-    var m = document.documentElement.getAttribute('data-mode');
-    if (!m) { m = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+    var de = document.documentElement;
+    var m = de.getAttribute('data-bs-theme') || de.getAttribute('data-mode');
+    if (m !== 'light' && m !== 'dark') { m = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
     host.setAttribute('data-theme', m);
   }
   theme();
+  if (window.MutationObserver) {
+    new MutationObserver(theme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-bs-theme', 'data-mode'] });
+  }
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) { mq.addEventListener('change', theme); }
+  }
   fetch(host.getAttribute('data-src')).then(function (r) { return r.text(); }).then(function (html) {
     root.innerHTML = html;
     var wrap = root.querySelector('.post-body') || root;
