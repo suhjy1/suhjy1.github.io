@@ -273,7 +273,7 @@ figure svg + svg{ margin-top: 10px; }
 .tsw{ display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:5px; vertical-align: 0; }
 small.note{ display:block; color: var(--ink3); font: 13px/1.5 system-ui, sans-serif; margin-top: 40px; }</style>
 <div class="post-body">
-<title>Porting the hot loop, and four doors for look-ahead</title>
+<title>How Look-Ahead Sneaks into Fast Code</title>
 <style>
   :root { color-scheme: light; --bg:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --ink3:#8a8984; --line:#e6e4dd;
           --pos:#2a78d6; --neg:#eb6834; --neu:#9c9a92; --card:#f4f3ef; --shade: rgba(120,118,110,.13);
@@ -317,7 +317,7 @@ small.note{ display:block; color: var(--ink3); font: 13px/1.5 system-ui, sans-se
 
 <main>
 <p class="meta">Stat-arb engineering note</p>
-<h1>Porting the hot loop honestly, and four doors for look-ahead</h1>
+<h1>How Look-Ahead Sneaks into Fast Code</h1>
 <p class="sub">Two engineering lessons from the stat-arb project: measure a C++ port against a fair baseline, not against the slowest Python, and give every place the future can leak in its own test.</p>
 
 <h2>Part 1. The C++ port, against a fair baseline</h2>
