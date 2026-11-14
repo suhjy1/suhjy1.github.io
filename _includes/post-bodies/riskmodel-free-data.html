@@ -271,7 +271,6 @@ small.note{ display:block; color: var(--ink3); font: 13px/1.5 system-ui, sans-se
 <main>
 <h1>Building a Barra Model from Free Data</h1>
 <p class="sub">A daily US equity risk model with market, industry and style factors, built from free prices and SEC filings and evaluated once under a registered protocol.</p>
-<p class="meta">Research note</p>
 <p class="aside">Survivorship-biased free data. Every number below comes from companies listed today. Failed and delisted stocks are missing, which most likely makes realised risk look lower and tails thinner. The models are ranked on the same survivors, so the ranking means more than any absolute risk level. No return or Sharpe ratio of any factor or portfolio is reported.</p>
 
 <p>I built a Barra-style risk model from free data and tested it once against three simpler models. The short version: it hedges better than the single-ETF hedge I used before, it does not hedge better than principal component analysis (PCA) built from returns alone, and on random long-short portfolios its risk forecasts are better calibrated than both. What is left in its residuals is real but small.</p>
